@@ -17,3 +17,30 @@
 .flex-center {
   @apply flex items-center justify-center;
 }
+
+.main__image {
+  border: 3px solid black;
+}
+
+.image__slider__editor {
+  position: relative;
+}
+
+.image__slider__editor img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.image__slider__editor__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.343);
+  opacity: 0;
+}
+
+.image__slider__editor:hover .image__slider__editor__container {
+  opacity: 1;
+}

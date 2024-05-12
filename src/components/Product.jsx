@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Product = ({ image, title, price, discount, original__price }) => {
   return (
-    <NavLink to={"/"} className="product__card w-auto h-[350px]">
+    <NavLink to={"/"} className="product__card w-auto h-[250px]">
       <div className="product__card__image__container w-full h-full">
         <img
           src={image}
