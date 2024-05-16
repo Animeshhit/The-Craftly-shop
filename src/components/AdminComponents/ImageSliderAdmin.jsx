@@ -6,15 +6,20 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
 
-const ImageSliderAdmin = ({ isPopupOpen, setIsPopupOpen }) => {
+const ImageSliderAdmin = ({
+  isPopupOpen,
+  setIsPopupOpen,
+  banners,
+  setBanners,
+  setLoadingProgress,
+}) => {
   const [MainImageDropDown, setMainImageDropDown] = useState(false);
   const [slidesPerView, setSlidesPerView] = useState(3);
-  const [banners, setBanners] = useState(null);
 
   // null ==> loading state
   // [] ==> loading done and no banner found or something went wrong
   // [{..data}] ==> actual data
-
+  // getting all the information from the server
   const getAllBannersImages = async () => {
     try {
       let APIREQ = await fetch(
@@ -31,6 +36,89 @@ const ImageSliderAdmin = ({ isPopupOpen, setIsPopupOpen }) => {
     } catch (err) {
       console.log(err);
       alert(err.message);
+    }
+  };
+
+  // function for deleting a banner
+  const deleteABanner = async (bannerId) => {
+    try {
+      setLoadingProgress(30);
+      let APIREQ = await fetch(
+        `${baseApiURLForAdmin}/deleteabannerimage?bannerId=${bannerId}&adminapikey=${token}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      let APIRES = await APIREQ.json();
+      // alert(APIRES.message);
+      let updatedBanners = banners.filter((banner) => {
+        return banner._id !== bannerId; // Return true for banners with _id not equal to bannerId
+      });
+      console.log(updatedBanners);
+      console.log(updatedBanners);
+      setBanners(updatedBanners);
+      setLoadingProgress(70);
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
+    } finally {
+      setLoadingProgress(100);
+    }
+  };
+
+  //function for updating the ui
+  function updateMainImage(_id) {
+    // Find the index of the document with the given _id
+    const indexToUpdate = banners.findIndex((banner) => banner._id === _id);
+
+    // If no document with the given _id is found, return
+    if (indexToUpdate === -1) {
+      console.log("No document found with the given _id.");
+      return;
+    }
+
+    // Loop through the banners array and update isMainImage property accordingly
+    banners.forEach((banner, index) => {
+      if (index === indexToUpdate) {
+        banner.isMainImage = true;
+      } else {
+        banner.isMainImage = false;
+      }
+    });
+  }
+
+  //function to set main image
+  const setMainImage = async (bannerId) => {
+    try {
+      setLoadingProgress(30);
+      setMainImageDropDown(false);
+      let APIREQ = await fetch(
+        `${baseApiURLForAdmin}/changemainimage?bannerId=${bannerId}&adminapikey=${token}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      let APIRES = await APIREQ.json();
+      setLoadingProgress(50);
+      console.log(APIRES);
+      if (APIREQ.status == 200) {
+        updateMainImage(bannerId);
+      } else {
+        alert(APIRES.message);
+        console.log(APIRES);
+      }
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
+    } finally {
+      setBanners(banners);
+      setLoadingProgress(100);
     }
   };
 
@@ -66,7 +154,11 @@ const ImageSliderAdmin = ({ isPopupOpen, setIsPopupOpen }) => {
             Main Image Slider Editor
           </h1>
           <div className="slider__container mt-6 py-4 rounded-lg">
-            <div className="slider__container__header__components flex items-center justify-start md:justify-end">
+            <div
+              className={`slider__container__header__components ${
+                banners && banners.length > 0 ? "flex" : "hidden"
+              } items-center justify-start md:justify-end`}
+            >
               <div className="main__dropdown__container relative">
                 <button
                   onClick={() => {
@@ -104,18 +196,18 @@ const ImageSliderAdmin = ({ isPopupOpen, setIsPopupOpen }) => {
                     className="py-2 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownDefaultButton"
                   >
-                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
-                      First Image
-                    </li>
-                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
-                      Second Image
-                    </li>
-                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
-                      Third Image
-                    </li>
-                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
-                      Fourth Image
-                    </li>
+                    {banners && banners.length > 0
+                      ? banners.map((item, key) => (
+                          <li
+                            className="py-3 px-4 hover:bg-zinc-800 cursor-pointer"
+                            onClick={() => {
+                              setMainImage(item._id);
+                            }}
+                          >
+                            {key + 1} Image
+                          </li>
+                        ))
+                      : ""}
                   </ul>
                 </div>
               </div>
@@ -129,9 +221,27 @@ const ImageSliderAdmin = ({ isPopupOpen, setIsPopupOpen }) => {
               modules={[Pagination]}
             >
               {banners == null ? (
-                <h2>loading....</h2>
+                <>
+                  {" "}
+                  <SwiperSlide
+                    className={`image__slider__loading animate-pulse`}
+                  ></SwiperSlide>
+                  <SwiperSlide
+                    className={`image__slider__loading animate-pulse`}
+                  ></SwiperSlide>
+                  <SwiperSlide
+                    className={`image__slider__loading animate-pulse`}
+                  ></SwiperSlide>
+                  <SwiperSlide
+                    className={`image__slider__loading animate-pulse`}
+                  ></SwiperSlide>
+                </>
               ) : !(banners.length > 0) ? (
-                <h3>No banner found </h3>
+                <SwiperSlide
+                  className={`image__slider__nofound flex items-center justify-center`}
+                >
+                  <p className="text-white">No Banner Found</p>
+                </SwiperSlide>
               ) : (
                 banners.map((item, key) => (
                   <SwiperSlide
@@ -153,6 +263,9 @@ const ImageSliderAdmin = ({ isPopupOpen, setIsPopupOpen }) => {
                         </button>
                         <button
                           type="button"
+                          onClick={() => {
+                            deleteABanner(item._id);
+                          }}
                           className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
                         >
                           <ion-icon name="trash"></ion-icon>

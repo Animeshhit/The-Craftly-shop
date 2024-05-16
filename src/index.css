@@ -24,11 +24,14 @@
 
 .image__slider__editor {
   position: relative;
+  height: 250px;
 }
 
 .image__slider__editor img {
   object-fit: cover;
   object-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 .image__slider__editor__container {
@@ -43,4 +46,14 @@
 
 .image__slider__editor:hover .image__slider__editor__container {
   opacity: 1;
+}
+
+.image__slider__loading {
+  height: 250px;
+  background-color: rgba(0, 0, 0, 0.543);
+}
+
+.image__slider__nofound {
+  height: 250px;
+  background-color: rgba(0, 0, 0, 0.943);
 }

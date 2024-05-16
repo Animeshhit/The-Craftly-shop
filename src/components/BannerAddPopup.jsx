@@ -5,6 +5,8 @@ const BannerAddPopup = ({
   isPopupOpen,
   setIsPopupOpen,
   setLoadingProgress,
+  banners,
+  setBanners,
 }) => {
   const initialData = {
     bannerImage: "",
@@ -20,6 +22,7 @@ const BannerAddPopup = ({
     e.preventDefault();
 
     try {
+      setLoadingProgress(30);
       let APIREQ = await fetch(
         `${baseApiURLForAdmin}/addnewbanner?adminapikey=${token}`,
         {
@@ -31,16 +34,22 @@ const BannerAddPopup = ({
         }
       );
       let APIRES = await APIREQ.json();
+      setLoadingProgress(50);
       if (APIREQ.status == 201) {
         alert(APIRES.message);
         setIsPopupOpen(false);
+        banners.push(APIRES.banner);
+        setBanners(banners);
         setData(initialData);
       } else {
         alert(APIRES.message);
       }
+      setLoadingProgress(70);
     } catch (err) {
       alert(err.message);
       console.log(err);
+    } finally {
+      setLoadingProgress(100);
     }
   };
   return (

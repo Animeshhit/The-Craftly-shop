@@ -8,6 +8,7 @@ import {
 
 const MyShop = ({ setLoadingProgress }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [banners, setBanners] = useState(null);
   useEffect(() => {
     setLoadingProgress(100);
   }, []);
@@ -17,10 +18,15 @@ const MyShop = ({ setLoadingProgress }) => {
         isPopupOpen={isPopupOpen}
         setIsPopupOpen={setIsPopupOpen}
         setLoadingProgress={setLoadingProgress}
+        banners={banners}
+        setBanners={setBanners}
       />
       <ImageSliderAdmin
         isPopupOpen={isPopupOpen}
+        setLoadingProgress={setLoadingProgress}
         setIsPopupOpen={setIsPopupOpen}
+        banners={banners}
+        setBanners={setBanners}
       />
       <ProductsNavbar />
       <ProductsAdmin />
