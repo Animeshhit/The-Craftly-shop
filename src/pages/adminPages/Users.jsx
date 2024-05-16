@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-const Users = () => {
-  return (
-    <div>
+const Users = ({ setLoadingProgress }) => {
+  useEffect(() => {
+    setLoadingProgress(100);
+  }, []);
+  return <div></div>;
+};
 
-    </div>
-  )
-}
-
-export default Users
+export default Users;

@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-const Orders = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const Orders = ({ setLoadingProgress }) => {
+  useEffect(() => {
+    setLoadingProgress(100);
+  }, []);
+  return <div></div>;
+};
 
-export default Orders
+export default Orders;

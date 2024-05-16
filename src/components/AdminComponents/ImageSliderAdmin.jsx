@@ -1,14 +1,43 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { baseApiURLForAdmin, token } from "../../../config/api";
 import "swiper/css";
 import "swiper/css/pagination";
 
 import { Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
 
-const ImageSliderAdmin = () => {
+const ImageSliderAdmin = ({ isPopupOpen, setIsPopupOpen }) => {
   const [MainImageDropDown, setMainImageDropDown] = useState(false);
   const [slidesPerView, setSlidesPerView] = useState(3);
+  const [banners, setBanners] = useState(null);
+
+  // null ==> loading state
+  // [] ==> loading done and no banner found or something went wrong
+  // [{..data}] ==> actual data
+
+  const getAllBannersImages = async () => {
+    try {
+      let APIREQ = await fetch(
+        `${baseApiURLForAdmin}/banners?adminapikey=${token}`
+      );
+      let APIRES = await APIREQ.json();
+      console.log(APIRES);
+      if (APIREQ.status == 200) {
+        setBanners(APIRES);
+        console.log(APIRES);
+      } else {
+        setBanners([]);
+      }
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllBannersImages();
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
       // Adjust slidesPerView based on screen width
@@ -75,37 +104,17 @@ const ImageSliderAdmin = () => {
                     className="py-2 text-sm text-gray-700 dark:text-gray-200"
                     aria-labelledby="dropdownDefaultButton"
                   >
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Dashboard
-                      </a>
+                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
+                      First Image
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Settings
-                      </a>
+                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
+                      Second Image
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Earnings
-                      </a>
+                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
+                      Third Image
                     </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Sign out
-                      </a>
+                    <li className="py-3 px-4 hover:bg-zinc-800 cursor-pointer">
+                      Fourth Image
                     </li>
                   </ul>
                 </div>
@@ -119,124 +128,54 @@ const ImageSliderAdmin = () => {
               spaceBetween={30}
               modules={[Pagination]}
             >
-              <SwiperSlide className="image__slider__editor main__image">
-                <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
-                  <p className="font-Karla font-semibold text-white text-xl py-3">
-                    Main Image
-                  </p>
-                  <div className="flex items-center gap-4 justify-center">
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="create"></ion-icon>
-                    </button>
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="trash"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-              </SwiperSlide>
-              <SwiperSlide className="image__slider__editor">
-                <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
-                  <p className="font-Karla font-semibold text-white text-xl py-3">
-                    Second Image
-                  </p>
-                  <div className="flex items-center gap-4 justify-center">
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="create"></ion-icon>
-                    </button>
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="trash"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-              </SwiperSlide>
-              <SwiperSlide className="image__slider__editor">
-                <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
-                  <p className="font-Karla font-semibold text-white text-xl py-3">
-                    Third Image
-                  </p>
-                  <div className="flex items-center gap-4 justify-center">
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="create"></ion-icon>
-                    </button>
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="trash"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-              </SwiperSlide>
-              <SwiperSlide className="image__slider__editor">
-                <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
-                  <p className="font-Karla font-semibold text-white text-xl py-3">
-                    Fourth Image
-                  </p>
-                  <div className="flex items-center gap-4 justify-center">
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="create"></ion-icon>
-                    </button>
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="trash"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-              </SwiperSlide>
-              <SwiperSlide className="image__slider__editor">
-                <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
-                  <p className="font-Karla font-semibold text-white text-xl py-3">
-                    Fifth Image
-                  </p>
-                  <div className="flex items-center gap-4 justify-center">
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="create"></ion-icon>
-                    </button>
-                    <button
-                      type="button"
-                      className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
-                    >
-                      <ion-icon name="trash"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-              </SwiperSlide>
+              {banners == null ? (
+                <h2>loading....</h2>
+              ) : !(banners.length > 0) ? (
+                <h3>No banner found </h3>
+              ) : (
+                banners.map((item, key) => (
+                  <SwiperSlide
+                    key={key}
+                    className={`image__slider__editor ${
+                      item.isMainImage ? "main__image" : ""
+                    }`}
+                  >
+                    <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
+                      <p className="font-Karla font-semibold text-white text-xl py-3">
+                        {item.isMainImage ? "Main Image" : "sample text"}
+                      </p>
+                      <div className="flex items-center gap-4 justify-center">
+                        <button
+                          type="button"
+                          className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
+                        >
+                          <ion-icon name="create"></ion-icon>
+                        </button>
+                        <button
+                          type="button"
+                          className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
+                        >
+                          <ion-icon name="trash"></ion-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <img src={item.bannerImage} />
+                  </SwiperSlide>
+                ))
+              )}
             </Swiper>
             <div className="main__image__slider__adding__container flex items-center justify-end mt-4">
-              <div className="py-3 px-12 bg-zinc-800 text-white rounded-md font-semibold font-Karla cursor-pointer hover:bg-zinc-600 transition flex items-center gap-2">
+              <div
+                onClick={() => {
+                  setIsPopupOpen(true);
+                }}
+                className="py-3 px-12 bg-zinc-800 text-white rounded-md font-semibold font-Karla cursor-pointer hover:bg-zinc-600 transition flex items-center gap-2"
+              >
                 <div className="text-xl flex items-center justify-center">
                   {" "}
                   <ion-icon name="add"></ion-icon>{" "}
                 </div>
-                <span> Add New Product </span>
+                <span> Add New Banner </span>
               </div>
             </div>
           </div>

@@ -8,6 +8,9 @@ import Product from "./Product";
 import AdminNavbar from "./AdminComponents/Navbar";
 import ImageSliderAdmin from "./AdminComponents/ImageSliderAdmin";
 import ProductsAdmin from "./AdminComponents/ProductsAdmin";
+import ProductsNavbar from "./AdminComponents/ProductsNavbar";
+import Loading from "./Loading";
+import BannerAddPopup from "./BannerAddPopup";
 
 export {
   Footer,
@@ -20,4 +23,7 @@ export {
   AdminNavbar,
   ImageSliderAdmin,
   ProductsAdmin,
+  ProductsNavbar,
+  Loading,
+  BannerAddPopup,
 };
