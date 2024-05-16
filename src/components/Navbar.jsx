@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
-    <> 
+    <>
       <header className="sm:py-3 py-4">
         <div className="container mx-auto ms:px-0 px-4">
           <div className="navbar__container flex items-center justify-between">
@@ -20,7 +20,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2" to="/">
+                  <NavLink className="block py-3 px-2" to="/admin">
                     Shop
                   </NavLink>
                 </li>
