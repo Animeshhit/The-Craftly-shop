@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { baseApiURLForAdmin, token } from "../../../config/api";
+import { baseApiURLForAdmin, baseApiURL, token } from "../../../config/api";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -22,9 +22,7 @@ const ImageSliderAdmin = ({
   // getting all the information from the server
   const getAllBannersImages = async () => {
     try {
-      let APIREQ = await fetch(
-        `${baseApiURLForAdmin}/banners?adminapikey=${token}`
-      );
+      let APIREQ = await fetch(`${baseApiURL}/banners`);
       let APIRES = await APIREQ.json();
       console.log(APIRES);
       if (APIREQ.status == 200) {

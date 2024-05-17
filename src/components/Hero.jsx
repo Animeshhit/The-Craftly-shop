@@ -1,11 +1,34 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { baseApiURL } from "../../config/api";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
 import { Pagination } from "swiper/modules";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [banners, setBanners] = useState(null);
+  const getAllBannersImages = async () => {
+    try {
+      let APIREQ = await fetch(`${baseApiURL}/banners`);
+      let APIRES = await APIREQ.json();
+
+      if (APIREQ.status == 200) {
+        setBanners(APIRES);
+      } else {
+        alert(APIRES.message);
+        setBanners([]);
+      }
+    } catch (err) {
+      alert(err.message);
+      console.log(err);
+      setBanners([]);
+    }
+  };
+  useEffect(() => {
+    getAllBannersImages();
+  }, []);
   return (
     <>
       <Swiper
@@ -16,16 +39,17 @@ const Hero = () => {
         loop={true}
         modules={[Pagination]}
       >
-        <SwiperSlide className="hero__slider">
-          <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-        </SwiperSlide>
-        <SwiperSlide className="hero__slider">
-          <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-        </SwiperSlide>
-
-        <SwiperSlide className="hero__slider">
-          <img src="https://images.unsplash.com/photo-1713365963723-655fa464b681?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-        </SwiperSlide>
+        {banners == null ? (
+          <h2>Loading..</h2>
+        ) : banners.length > 0 ? (
+          banners.map((item, key) => (
+            <SwiperSlide key={key} className="hero__slider">
+              <img src={item.bannerImage} />
+            </SwiperSlide>
+          ))
+        ) : (
+          <h2>no banners image found</h2>
+        )}
       </Swiper>
     </>
   );
