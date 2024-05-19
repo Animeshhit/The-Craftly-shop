@@ -12,14 +12,6 @@ const ImageSliderAdmin = ({
   banners,
   setBanners,
   setLoadingProgress,
-  data,
-  setData,
-  edit,
-  setEdit,
-  editBtnDisabled,
-  setEditBtnDisabled,
-  deleteBtnDisabled,
-  setDeleteBtnDisabled
 }) => {
   const [MainImageDropDown, setMainImageDropDown] = useState(false);
   const [slidesPerView, setSlidesPerView] = useState(3);
@@ -113,27 +105,23 @@ const ImageSliderAdmin = ({
       console.log(APIRES);
       if (APIREQ.status == 200) {
         updateMainImage(bannerId);
-      }
-      else{
+      } else {
         alert(APIRES.message);
         console.log(APIRES);
       }
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
       alert(err.message);
-    }
-    finally{
+    } finally {
       setBanners(banners);
       setLoadingProgress(100);
     }
   };
 
-  const editABannerImage = async ({ _id, bannerImage, bannerLink }) => {
-    setIsPopupOpen(true);
-    setData({bannerImage,bannerLink});
-    setEdit({mode:true,id:_id});
-  }
+  useEffect(() => {
+    getAllBannersImages();
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
       // Adjust slidesPerView based on screen width
@@ -154,10 +142,6 @@ const ImageSliderAdmin = ({
     // Remove event listener on component unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  useEffect(() => {
-    getAllBannersImages();
-  },[])
   return (
     <>
       <section id="image__slider__editor" className="my-12">
@@ -269,9 +253,6 @@ const ImageSliderAdmin = ({
                       <div className="flex items-center gap-4 justify-center">
                         <button
                           type="button"
-                          onClick={() => {
-                            editABannerImage(item);
-                          }}
                           className="bg-white text-xl w-[30px] h-[30px] flex items-center justify-center font-semibold text-zinc-800 rounded-full cursor-pointer"
                         >
                           <ion-icon name="create"></ion-icon>
@@ -295,7 +276,6 @@ const ImageSliderAdmin = ({
             <div className="main__image__slider__adding__container flex items-center justify-end mt-4">
               <div
                 onClick={() => {
-                  setEdit({ mode: false, id: null });
                   setIsPopupOpen(true);
                 }}
                 className="py-3 px-12 bg-zinc-800 text-white rounded-md font-semibold font-Karla cursor-pointer hover:bg-zinc-600 transition flex items-center gap-2"

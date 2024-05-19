@@ -7,20 +7,24 @@ const BannerAddPopup = ({
   setLoadingProgress,
   banners,
   setBanners,
+  data,
+  setData,
+  edit,
+  setEdit,
+  editABannerImage,
+  submitBtnDisabled,
+  setSubmitBtnDisabled,
 }) => {
   const initialData = {
     bannerImage: "",
     bannerLink: "",
   };
-  const [data, setData] = useState(initialData);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   // for creating a new banner
-  const createNewBanner = async (e) => {
-    e.preventDefault();
-
+  const createNewBanner = async () => {
     try {
       setLoadingProgress(30);
       let APIREQ = await fetch(
@@ -72,7 +76,9 @@ const BannerAddPopup = ({
                 className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-hide="authentication-modal"
                 onClick={() => {
+                  setData(initialData);
                   setIsPopupOpen(false);
+                  setEdit({mode:false,id:null});
                 }}
               >
                 <svg
@@ -94,7 +100,20 @@ const BannerAddPopup = ({
               </button>
             </div>
             <div className="p-4 md:p-5">
-              <form className="space-y-4" onSubmit={createNewBanner}>
+              <form
+                className="space-y-4"
+                onSubmit={(e) => {
+                  setSubmitBtnDisabled(true);
+                  e.preventDefault();
+                  edit.mode && edit.id
+                    ? editABannerImage(edit.id)
+                    : createNewBanner();
+
+                  setTimeout(() => {
+                    setSubmitBtnDisabled(false);
+                  }, 200);
+                }}
+              >
                 <div>
                   <label
                     htmlFor="bannerImage"
@@ -132,10 +151,11 @@ const BannerAddPopup = ({
                   />
                 </div>
                 <button
+                  disabled={submitBtnDisabled}
                   type="submit"
                   className="w-full text-white bg-zinc-900 py-3 px-4 rounded-md"
                 >
-                  Create Banner
+                  {edit.mode ? "Update Banner" : "Create Banner"}
                 </button>
               </form>
             </div>
