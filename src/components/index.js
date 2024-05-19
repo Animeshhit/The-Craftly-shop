@@ -10,7 +10,7 @@ import ImageSliderAdmin from "./AdminComponents/ImageSliderAdmin";
 import ProductsAdmin from "./AdminComponents/ProductsAdmin";
 import ProductsNavbar from "./AdminComponents/ProductsNavbar";
 import Loading from "./Loading";
-import BannerAddPopup from "./BannerAddPopup";
+import BannerAddPopup from "./AdminComponents/BannerAddPopup";
 
 export {
   Footer,

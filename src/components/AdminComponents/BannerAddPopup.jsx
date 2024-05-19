@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { baseApiURLForAdmin, token } from "../../config/api";
+import { baseApiURLForAdmin, token } from "../../../config/api";
 
 const BannerAddPopup = ({
   isPopupOpen,
