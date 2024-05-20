@@ -57,3 +57,7 @@
   height: 250px;
   background-color: rgba(0, 0, 0, 0.943);
 }
+
+.vertical-center{
+  @apply top-1/2 translate-y-1/2;
+}

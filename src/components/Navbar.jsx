@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
+import Account from "../pages/Account";
 
-
-
+//redux
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const auth = useSelector((state) => state.auth);
   return (
     <>
       <header className="sm:py-3 py-4">
@@ -11,37 +13,37 @@ const Navbar = () => {
           <div className="navbar__container flex items-center justify-between">
             <NavLink
               to="/"
-              className="logo sm:text-2xl font-Karla font-semibold flex items-center gap-2"
+              className="logo sm:text-xl font-Karla font-semibold flex items-center gap-2"
             >
               <ion-icon name="storefront"></ion-icon>
-              <span className="rubik-font">The Craftly Shop</span>
+              <span className="font-Karla">The Craftly Shop</span>
             </NavLink>
             <div className="navbar__links md:flex hidden">
-              <ul className="flex items-center gap-6">
+              <ul className="flex items-center gap-4">
                 <li>
-                  <NavLink className="block py-3 px-2" to="/">
+                  <NavLink className="block py-3 px-2 text-sm" to="/">
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2" to="/admin">
+                  <NavLink className="block py-3 px-2 text-sm" to="/admin">
                     Shop
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2" to="/">
+                  <NavLink className="block py-3 px-2 text-sm" to="/">
                     Offers
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2" to="/">
+                  <NavLink className="block py-3 px-2 text-sm" to="/">
                     Contact
                   </NavLink>
                 </li>
               </ul>
             </div>
             <div className="navbar__right__container flex items-center sm:gap-8 gap-4">
-              <form className="navbar__search-bar relative w-[200px] md:flex hidden items-center">
+              <form className="navbar__search-bar relative w-[250px] md:flex hidden items-center">
                 <div className="searchbar__icon absolute flex items-center justify-center left-3">
                   <ion-icon name="search"></ion-icon>
                 </div>
@@ -58,9 +60,12 @@ const Navbar = () => {
                 <div className="navbar__cta__cart text-2xl flex-center">
                   <ion-icon name="cart-outline"></ion-icon>
                 </div>
-                <div className="navbar__cta__account text-2xl flex-center">
+                <NavLink
+                  to={auth.isAuth ? "/user/account" : "/auth/register"}
+                  className="navbar__cta__account text-2xl flex-center"
+                >
                   <ion-icon name="person-circle-outline"></ion-icon>
-                </div>
+                </NavLink>
               </div>
               <div className="navbar__menu md:hidden flex items-center justify-center text-2xl">
                 <ion-icon name="menu-outline"></ion-icon>

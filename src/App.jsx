@@ -6,9 +6,14 @@ import MyShop from "./pages/adminPages/MyShop";
 import Orders from "./pages/adminPages/Orders";
 import Users from "./pages/adminPages/Users";
 import LoadingBar from "react-top-loading-bar";
+import Regiser from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
+import Error from "./pages/Error";
+import Account from "./pages/Account";
+import { Navigate } from "react-router-dom";
 
 const App = () => {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const location = useLocation();
   const [pathName, setPathName] = useState(location.pathname);
   const [loading, setLoading] = useState(false);
@@ -37,12 +42,29 @@ const App = () => {
       <Routes>
         <Route
           path="/"
+          exact
           element={
             <Home setLoadingProgress={setLoadingProgress} loading={loading} />
           }
         />
         <Route
+          path="/auth/register"
+          exact
+          element={<Regiser setLoadingProgress={setLoadingProgress} />}
+        />
+        <Route
+          path="/auth/login"
+          exact
+          element={<Login setLoadingProgress={setLoadingProgress} />}
+        />
+        <Route
+          path="/user/account"
+          exact
+          element={<Account setLoadingProgress={setLoadingProgress} />}
+        />
+        <Route
           path="/admin"
+          exact
           element={
             isAdmin ? (
               <MyShop
@@ -50,12 +72,13 @@ const App = () => {
                 loading={loading}
               />
             ) : (
-              <Home setLoadingProgress={setLoadingProgress} loading={loading} />
+              <Navigate to="/" replace={true} />
             )
           }
         />
         <Route
           path="/admin/orders"
+          exact
           element={
             isAdmin ? (
               <Orders
@@ -63,12 +86,13 @@ const App = () => {
                 loading={loading}
               />
             ) : (
-              <Home setLoadingProgress={setLoadingProgress} loading={loading} />
+              <Navigate to="/" replace={true} />
             )
           }
         />
         <Route
           path="/admin/users"
+          exact
           element={
             isAdmin ? (
               <Users
@@ -76,10 +100,11 @@ const App = () => {
                 loading={loading}
               />
             ) : (
-              <Home setLoadingProgress={setLoadingProgress} loading={loading} />
+              <Navigate to="/" replace={true} />
             )
           }
         />
+        <Route path="/*" element={<Error />} />
       </Routes>
       {/* <Footer /> */}
     </>

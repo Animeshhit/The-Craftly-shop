@@ -11,6 +11,7 @@ import ProductsAdmin from "./AdminComponents/ProductsAdmin";
 import ProductsNavbar from "./AdminComponents/ProductsNavbar";
 import Loading from "./Loading";
 import BannerAddPopup from "./AdminComponents/BannerAddPopup";
+import Input from "./CustomComponents/Input";
 
 export {
   Footer,
@@ -26,4 +27,5 @@ export {
   ProductsNavbar,
   Loading,
   BannerAddPopup,
+  Input
 };
