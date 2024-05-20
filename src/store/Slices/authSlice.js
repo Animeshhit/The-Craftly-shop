@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { baseApiURL } from "../../../config/api";
 
 const initialState = {
-    isAuth:false,
+    isAuth:null,
     user:null
 }
+
 
 
 export const authSlice = createSlice({
@@ -26,6 +27,7 @@ export const authSlice = createSlice({
       }
     },
     getUser:(state,action) => {
+        console.log(action);
         return action.payload;
     }
   }

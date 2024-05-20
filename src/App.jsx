@@ -11,9 +11,17 @@ import Login from "./pages/auth/Login";
 import Error from "./pages/Error";
 import Account from "./pages/Account";
 import { Navigate } from "react-router-dom";
+import { baseApiURL } from "../config/api";
+import { GET } from "../config/getFunction";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./store/Slices/authSlice";
 
 const App = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  //redux
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const [isAdmin, setIsAdmin] = useState(null);
   const location = useLocation();
   const [pathName, setPathName] = useState(location.pathname);
   const [loading, setLoading] = useState(false);
@@ -25,6 +33,43 @@ const App = () => {
   useEffect(() => {
     setLoadingProgress(100);
   }, []);
+
+  const LoggedInUser = async () => {
+    // check token is valid or not if valid go ahead if not valid then return but give no feedback
+    // if request error then say only network connection error
+    // if apireq == 200 then only do something otherwise don't give response
+    // server is giving response but don't show that.
+    try {
+      let token = localStorage.getItem("__token");
+      if (!token) {
+        dispatch(getUser({ isAuth: false, user: null }));
+        return;
+      }
+      GET(`${baseApiURL}/auth/login?apikey=${token}`)
+        .then((data) => {
+          console.log(data.user.isAdmin);
+          if (data.status == 200) {
+            dispatch(getUser({ isAuth: true, user: data.user }));
+            setIsAdmin(data.user.isAdmin);
+          } else {
+            dispatch(getUser({ isAuth: false, user: null }));
+          }
+        })
+        .catch((err) => {
+          dispatch(getUser({ isAuth: false, user: null }));
+          console.log(err);
+        });
+    } catch (err) {
+      dispatch(getUser({ isAuth: false, user: null }));
+      console.log(err);
+      alert("Network Connection Error");
+    }
+  };
+
+  useEffect(() => {
+    LoggedInUser();
+  }, []);
+
   return (
     <>
       <LoadingBar
@@ -60,13 +105,27 @@ const App = () => {
         <Route
           path="/user/account"
           exact
-          element={<Account setLoadingProgress={setLoadingProgress} />}
+          element={
+            auth.isAuth == null ? (
+              <h2>Loading...</h2>
+            ) : auth.isAuth ? (
+              isAdmin ? (
+                <Navigate to="/admin" replace={true} />
+              ) : (
+                <Account setLoadingProgress={setLoadingProgress} />
+              )
+            ) : (
+              <Navigate to="/auth/register" replace={true} />
+            )
+          }
         />
         <Route
           path="/admin"
           exact
           element={
-            isAdmin ? (
+            isAdmin == null ? (
+              <h2>Loading...</h2>
+            ) : isAdmin ? (
               <MyShop
                 setLoadingProgress={setLoadingProgress}
                 loading={loading}
