@@ -77,11 +77,22 @@ const App = () => {
         progress={loadingProgress}
         onLoaderFinished={() => setLoadingProgress(0)}
       />
-      {pathName == "/admin" ? (
-        <AdminNavbar loading={loading} />
+      {auth.isAuth == null ? (
+        "loading"
+      ) : auth.isAuth ? (
+        isAdmin ? (
+          pathName == "/admin" ? (
+            <AdminNavbar loading={loading} />
+          ) : (
+            <Navbar loading={loading} />
+          )
+        ) : (
+          <Navbar loading={loading} />
+        )
       ) : (
         <Navbar loading={loading} />
       )}
+
       {loading && <Loading loading={loading} />}
 
       <Routes>
