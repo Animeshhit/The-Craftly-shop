@@ -122,14 +122,14 @@ const Login = ({ setLoadingProgress }) => {
   }, [serverError]);
   return (
     <section className="login__screen mt-20">
-      <div className="container mx-auto sm:px-4 px-0">
+      <div className="container mx-auto sm:px-0 px-4">
         <div className="flex items-center">
-          <div className="left__container w-1/2 flex items-center justify-center h-[300px]">
+          <div className="left__container w-1/2 hidden sm:flex items-center justify-center h-[300px]">
             <img src="/Login.svg" alt="login here" className="w-full h-full" />
           </div>
-          <div className="right__container w-1/2">
-            <h1 className="font-Karla font-bold text-3xl">Login</h1>
-            <p className="font-Karla text-sm mt-3 leading-6">
+          <div className="right__container w-full md:w-1/2">
+            <h1 className="font-Karla font-bold text-2xl sm:text-3xl">Login</h1>
+            <p className="font-Karla text-xs sm:text-sm mt-3 leading-6">
               "Welcome to our shopping website login! Sign in to access your
               account and enjoy seamless browsing, secure transactions, and
               personalized shopping experiences."
@@ -140,7 +140,7 @@ const Login = ({ setLoadingProgress }) => {
                 Label="Mobile"
                 Type="Number"
                 PlaceHolder="e.g 8637XX84X4"
-                InputStyles="w-3/4"
+                InputStyles="w-full sm:w-3/4"
                 name="mobile"
                 Value={userData.mobile}
                 handleChange={handleChange}
@@ -151,7 +151,7 @@ const Login = ({ setLoadingProgress }) => {
                 Label="Password"
                 Type="password"
                 PlaceHolder="Password"
-                InputStyles="w-3/4"
+                InputStyles="w-full sm:w-3/4"
                 ContainerStyles="mt-4"
                 name="password"
                 Value={userData.password}
@@ -161,11 +161,11 @@ const Login = ({ setLoadingProgress }) => {
               <button
                 disabled={loginBtn}
                 type="submit"
-                className="w-3/4 bg-zinc-800 hover:bg-zinc-600 transition text-white py-3 px-4 text-sm rounded-md mt-8"
+                className="w-full sm:w-3/4 bg-zinc-800 hover:bg-zinc-600 transition text-white py-3 px-4 text-sm rounded-md mt-8"
               >
                 Login
               </button>
-              <p className="text-sm font-Karla w-3/5 mx-auto mt-2">
+              <p className="text-sm font-Karla w-full text-center sm:text-left sm:w-3/5 mx-auto mt-2">
                 Don't have an account?{" "}
                 <NavLink
                   to="/auth/register"
