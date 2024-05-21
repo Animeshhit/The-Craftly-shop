@@ -135,7 +135,7 @@ const Register = ({ setLoadingProgress }) => {
               />
             </div>
             <div className="right__container w-full sm:w-2/3 md:w-1/2">
-              <h1 className="font-Karla font-bold text-xl sm:text-3xl">
+              <h1 className="font-Karla font-bold text-2xl sm:text-3xl">
                 Register here
               </h1>
               <p className="text-xs sm:text-sm mt-3 leading-6 sm:pr-24">
