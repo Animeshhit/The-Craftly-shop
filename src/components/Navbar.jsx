@@ -3,11 +3,32 @@ import Account from "../pages/Account";
 
 //redux
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
+  const [cartContainer, setCartContainer] = useState(false);
   return (
     <>
+      <div
+        className={`cart__container__overlay transition ${
+          cartContainer ? "" : "translate-x-full"
+        } fixed top-0 left-0 right-0 bottom-0`}
+        style={{ zIndex: 200 }}
+      >
+        <div className="cart__container absolute right-0 top-0 bottom-0 bg-white w-[350px] py-3 px-4">
+          <div className="cart__container__header flex items-center justify-end">
+            <div
+              onClick={() => {
+                setCartContainer(false);
+              }}
+              className="close__btn flex-center text-3xl cursor-pointer"
+            >
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
       <header className="sm:py-3 py-4">
         <div className="container mx-auto ms:px-0 px-4">
           <div className="navbar__container flex items-center justify-between">
@@ -57,7 +78,12 @@ const Navbar = () => {
                 <div className="navbar__cta__watchlist text-2xl hidden sm:flex items-center justify-center">
                   <ion-icon name="heart-outline"></ion-icon>
                 </div>
-                <div className="navbar__cta__cart text-2xl flex-center">
+                <div
+                  className="navbar__cta__cart text-2xl flex-center cursor-pointer"
+                  onClick={() => {
+                    setCartContainer(true);
+                  }}
+                >
                   <ion-icon name="cart-outline"></ion-icon>
                 </div>
                 <NavLink
