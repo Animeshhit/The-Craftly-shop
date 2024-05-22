@@ -21,7 +21,7 @@ const Hero = () => {
         setBanners([]);
       }
     } catch (err) {
-      alert(err.message);
+      // alert("NetWork Connection Error");
       console.log(err);
       setBanners([]);
     }
@@ -40,7 +40,12 @@ const Hero = () => {
         modules={[Pagination]}
       >
         {banners == null ? (
-          <h2>Loading..</h2>
+          <>
+            {" "}
+            <SwiperSlide className="hero__slider bg-zinc-900 animate-pulse"></SwiperSlide>
+            <SwiperSlide className="hero__slider bg-zinc-900 animate-pulse"></SwiperSlide>
+            <SwiperSlide className="hero__slider bg-zinc-900 animate-pulse"></SwiperSlide>
+          </>
         ) : banners.length > 0 ? (
           banners.map((item, key) => (
             <SwiperSlide key={key} className="hero__slider">
@@ -48,7 +53,9 @@ const Hero = () => {
             </SwiperSlide>
           ))
         ) : (
-          <h2>no banners image found</h2>
+          <SwiperSlide className="flex items-center justify-center bg-zinc-900">
+            <h2 className="font-Karla text-white text-xl">No Banners Found</h2>
+          </SwiperSlide>
         )}
       </Swiper>
     </>

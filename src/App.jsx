@@ -1,6 +1,12 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-import { Navbar, Footer, AdminNavbar, Loading } from "./components";
+import {
+  Navbar,
+  Footer,
+  AdminNavbar,
+  Loading,
+  NetworkError,
+} from "./components";
 import { useEffect, useState } from "react";
 import MyShop from "./pages/adminPages/MyShop";
 import Orders from "./pages/adminPages/Orders";
@@ -10,6 +16,7 @@ import Regiser from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Error from "./pages/Error";
 import Account from "./pages/Account";
+import Profile from "./pages/Profile";
 import { Navigate } from "react-router-dom";
 import { baseApiURL } from "../config/api";
 import { GET } from "../config/getFunction";
@@ -26,6 +33,7 @@ const App = () => {
   const [pathName, setPathName] = useState(location.pathname);
   const [loading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [NetworkConnection, setNetWorkConnection] = useState(false);
 
   useEffect(() => {
     setPathName(location.pathname);
@@ -57,18 +65,24 @@ const App = () => {
         })
         .catch((err) => {
           dispatch(getUser({ isAuth: false, user: null }));
+          setNetWorkConnection(true);
           console.log(err);
         });
     } catch (err) {
       dispatch(getUser({ isAuth: false, user: null }));
       console.log(err);
       alert("Network Connection Error");
+      setNetWorkConnection(true);
     }
   };
 
   useEffect(() => {
     LoggedInUser();
   }, []);
+
+  if (NetworkConnection) {
+    return <NetworkError />;
+  }
 
   return (
     <>
@@ -78,7 +92,7 @@ const App = () => {
         onLoaderFinished={() => setLoadingProgress(0)}
       />
       {auth.isAuth == null ? (
-        "loading"
+        <div className="w-full h-[60px] bg-zinc-700 animate-pulse"></div>
       ) : auth.isAuth ? (
         isAdmin ? (
           pathName == "/admin" ? (
@@ -124,6 +138,23 @@ const App = () => {
                 <Navigate to="/admin" replace={true} />
               ) : (
                 <Account setLoadingProgress={setLoadingProgress} />
+              )
+            ) : (
+              <Navigate to="/auth/register" replace={true} />
+            )
+          }
+        />
+        <Route
+          path="/user/account/profile"
+          exact
+          element={
+            auth.isAuth == null ? (
+              <h2>Loading</h2>
+            ) : auth.isAuth ? (
+              isAdmin ? (
+                <Navigate to="/admin" replace={true} />
+              ) : (
+                <Profile setLoadingProgress={setLoadingProgress} />
               )
             ) : (
               <Navigate to="/auth/register" replace={true} />

@@ -1,13 +1,20 @@
 import { NavLink } from "react-router-dom";
-import Account from "../pages/Account";
+import Account from "../pages/Profile";
+import { useLocation } from "react-router-dom";
 
 //redux
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const location = useLocation();
   const auth = useSelector((state) => state.auth);
   const [cartContainer, setCartContainer] = useState(false);
+  const [accountContainer, setAccountContainer] = useState(false);
+
+  useEffect(() => {
+    setAccountContainer(false);
+  }, [location.pathname]);
   return (
     <>
       <div
@@ -29,6 +36,44 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* cart container end   */}
+
+      {/* account dropdown  */}
+
+      <div
+        className={`account__dropdown ${
+          accountContainer ? "" : "hidden pointer-events-none"
+        } fixed bg-white right-[4%] top-[70px]`}
+        style={{ zIndex: 2000 }}
+      >
+        <NavLink
+          to="/user/account/profile"
+          className="block  my-1 hover:bg-zinc-300 px-6 py-2 transition"
+        >
+          Profile
+        </NavLink>
+        <NavLink
+          to="/user/account/orders"
+          className="block  my-1 hover:bg-zinc-300 px-6 py-2 transition"
+        >
+          Orders
+        </NavLink>
+        <NavLink
+          to="/user/account/orders"
+          className="block  my-1 hover:bg-zinc-300 px-6 py-2 transition"
+        >
+          Notifications
+        </NavLink>
+        <button
+          type="button"
+          className="block w-full text-left my-1 hover:bg-zinc-300 px-6 py-2 transition"
+        >
+          Log Out
+        </button>
+      </div>
+
+      {/* account dropdown menu end  */}
       <header className="sm:py-3 py-4">
         <div className="container mx-auto ms:px-0 px-4">
           <div className="navbar__container flex items-center justify-between">
@@ -86,12 +131,40 @@ const Navbar = () => {
                 >
                   <ion-icon name="cart-outline"></ion-icon>
                 </div>
-                <NavLink
+                {auth.isAuth == null ? (
+                  <div className="animate-pulse bg-gray-600 py-3 px-4 w-[100px] h-42"></div>
+                ) : auth.isAuth ? (
+                  auth.user.isAdmin ? (
+                    <NavLink
+                      to="/admin"
+                      className="navbar__cta__account text-2xl flex-center"
+                    >
+                      <ion-icon name="person-circle-outline"></ion-icon>
+                    </NavLink>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setAccountContainer((state) => !state);
+                      }}
+                      className="navbar__cta__account text-2xl flex-center"
+                    >
+                      <ion-icon name="person-circle-outline"></ion-icon>
+                    </button>
+                  )
+                ) : (
+                  <NavLink
+                    to="/auth/register"
+                    className="navbar__cta__account text-2xl flex-center"
+                  >
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                  </NavLink>
+                )}
+                {/* <NavLink
                   to={auth.isAuth ? "/user/account" : "/auth/register"}
                   className="navbar__cta__account text-2xl flex-center"
                 >
                   <ion-icon name="person-circle-outline"></ion-icon>
-                </NavLink>
+                </NavLink> */}
               </div>
               <div className="navbar__menu md:hidden flex items-center justify-center text-2xl">
                 <ion-icon name="menu-outline"></ion-icon>

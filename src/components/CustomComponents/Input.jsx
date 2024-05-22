@@ -12,6 +12,7 @@ const Input = ({
   name,
   Value,
   handleChange,
+  disabled,
 }) => {
   return (
     <>
@@ -32,6 +33,7 @@ const Input = ({
           id={Id}
           type={Type}
           placeholder={PlaceHolder}
+          disabled={disabled}
         />
         {Error && (
           <small className="text-red-500 font-Karla block px-1">{Error}</small>
