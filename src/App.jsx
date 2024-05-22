@@ -65,14 +65,14 @@ const App = () => {
         })
         .catch((err) => {
           dispatch(getUser({ isAuth: false, user: null }));
-          setNetWorkConnection(true);
+          // setNetWorkConnection(true);
           console.log(err);
         });
     } catch (err) {
       dispatch(getUser({ isAuth: false, user: null }));
       console.log(err);
       alert("Network Connection Error");
-      setNetWorkConnection(true);
+      // setNetWorkConnection(true);
     }
   };
 
