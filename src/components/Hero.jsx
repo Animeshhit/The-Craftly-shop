@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 
 const Hero = () => {
   const [banners, setBanners] = useState(null);
+  const [imageLoad, setImageLoad] = useState(true);
+
   const getAllBannersImages = async () => {
     try {
       let APIREQ = await fetch(`${baseApiURL}/banners`);
@@ -49,7 +51,15 @@ const Hero = () => {
         ) : banners.length > 0 ? (
           banners.map((item, key) => (
             <SwiperSlide key={key} className="hero__slider">
-              <img src={item.bannerImage} />
+              <img
+                loading="lazy"
+                decoding="auto"
+                className={`${imageLoad ? "blur-md" : ""}`}
+                onLoad={() => {
+                  setImageLoad(false);
+                }}
+                src={item.bannerImage}
+              />
             </SwiperSlide>
           ))
         ) : (

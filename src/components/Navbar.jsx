@@ -92,7 +92,7 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2 text-sm" to="/admin">
+                  <NavLink className="block py-3 px-2 text-sm" to="/">
                     Shop
                   </NavLink>
                 </li>
@@ -120,9 +120,6 @@ const Navbar = () => {
                 />
               </form>
               <div className="navbar__cta flex items-center gap-5">
-                <div className="navbar__cta__watchlist text-2xl hidden sm:flex items-center justify-center">
-                  <ion-icon name="heart-outline"></ion-icon>
-                </div>
                 <div
                   className="navbar__cta__cart text-2xl flex-center cursor-pointer"
                   onClick={() => {
@@ -159,12 +156,6 @@ const Navbar = () => {
                     <ion-icon name="person-circle-outline"></ion-icon>
                   </NavLink>
                 )}
-                {/* <NavLink
-                  to={auth.isAuth ? "/user/account" : "/auth/register"}
-                  className="navbar__cta__account text-2xl flex-center"
-                >
-                  <ion-icon name="person-circle-outline"></ion-icon>
-                </NavLink> */}
               </div>
               <div className="navbar__menu md:hidden flex items-center justify-center text-2xl">
                 <ion-icon name="menu-outline"></ion-icon>
