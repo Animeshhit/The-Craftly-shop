@@ -55,7 +55,6 @@ const App = () => {
       }
       GET(`${baseApiURL}/auth/login?apikey=${token}`)
         .then((data) => {
-          console.log(data.user.isAdmin);
           if (data.status == 200) {
             dispatch(getUser({ isAuth: true, user: data.user }));
             setIsAdmin(data.user.isAdmin);
@@ -65,14 +64,13 @@ const App = () => {
         })
         .catch((err) => {
           dispatch(getUser({ isAuth: false, user: null }));
-          // setNetWorkConnection(true);
           console.log(err);
         });
     } catch (err) {
       dispatch(getUser({ isAuth: false, user: null }));
       console.log(err);
       alert("Network Connection Error");
-      // setNetWorkConnection(true);
+      setNetWorkConnection(true);
     }
   };
 
