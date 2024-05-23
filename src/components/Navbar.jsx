@@ -55,20 +55,30 @@ const Navbar = () => {
         </NavLink>
         <NavLink
           to="/user/account/orders"
-          className="block  my-1 hover:bg-zinc-300 px-6 py-2 transition"
+          className="flex items-center gap-3 my-1 hover:bg-zinc-300 px-6 py-2 transition"
         >
+          <img width="20px" height="20px" src="/OrdersIcon.svg" alt="order" />
           Orders
         </NavLink>
         <NavLink
           to="/user/account/orders"
-          className="block  my-1 hover:bg-zinc-300 px-6 py-2 transition"
+          className="flex items-center gap-3  my-1 hover:bg-zinc-300 px-6 py-2 transition"
         >
+          <img
+            width="20px"
+            height="20px"
+            src="/NotificationsIcon.svg"
+            alt="Notifications"
+          />
           Notifications
         </NavLink>
         <button
           type="button"
-          className="block w-full text-left my-1 hover:bg-zinc-300 px-6 py-2 transition"
+          className="flex items-center gap-3 w-full text-left my-1 hover:bg-zinc-300 px-6 py-2 transition"
         >
+          <div className="icon w-[20px] h-[20px]">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </div>
           Log Out
         </button>
       </div>
