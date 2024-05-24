@@ -5,7 +5,7 @@ import {
   ProductsAdmin,
   ProductsNavbar,
 } from "../../components";
-import { baseApiURLForAdmin, token } from "../../../config/api";
+import { baseApiURLForAdmin } from "../../../config/api";
 
 const MyShop = ({ setLoadingProgress }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -27,7 +27,9 @@ const MyShop = ({ setLoadingProgress }) => {
 
   const editABannerImage = async (bannerId) => {
     try {
-      console.log(bannerId);
+      let token = localStorage.getItem("__token");
+      if (!token) return;
+      
       setLoadingProgress(30);
       let APIREQ = await fetch(
         `${baseApiURLForAdmin}/editabannerimage?adminapikey=${token}&bannerId=${bannerId}`,
@@ -52,7 +54,7 @@ const MyShop = ({ setLoadingProgress }) => {
               : banner
           )
         );
-      setEdit({mode:false,id:null});
+        setEdit({ mode: false, id: null });
       } else {
         alert(APIRES.message);
       }

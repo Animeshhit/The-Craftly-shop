@@ -57,9 +57,9 @@ const App = () => {
       GET(`${baseApiURL}/auth/login?apikey=${token}`)
         .then((data) => {
           if (data.status == 200) {
+            setIsAdmin(data.user.isAdmin);
             dispatch(getUser({ isAuth: true, user: data.user }));
             dispatch(setInitialItems(data.user.cart));
-            setIsAdmin(data.user.isAdmin);
           } else {
             dispatch(getUser({ isAuth: false, user: null }));
           }
