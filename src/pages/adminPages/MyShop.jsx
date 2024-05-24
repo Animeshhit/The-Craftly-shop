@@ -29,7 +29,7 @@ const MyShop = ({ setLoadingProgress }) => {
     try {
       let token = localStorage.getItem("__token");
       if (!token) return;
-      
+
       setLoadingProgress(30);
       let APIREQ = await fetch(
         `${baseApiURLForAdmin}/editabannerimage?adminapikey=${token}&bannerId=${bannerId}`,

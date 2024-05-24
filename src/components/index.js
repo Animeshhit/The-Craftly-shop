@@ -14,6 +14,7 @@ import BannerAddPopup from "./AdminComponents/BannerAddPopup";
 import Input from "./CustomComponents/Input";
 import Button from "./CustomComponents/Button";
 import NetworkError from "./NetworkError";
+import SklLoading from "./CustomComponents/SklLoading";
 
 export {
   Footer,
@@ -31,5 +32,6 @@ export {
   BannerAddPopup,
   Input,
   Button,
-  NetworkError
+  NetworkError,
+  SklLoading
 };

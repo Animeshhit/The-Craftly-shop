@@ -1,12 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-import {
-  Navbar,
-  Footer,
-  AdminNavbar,
-  Loading,
-  NetworkError,
-} from "./components";
+import { Navbar, Footer, Loading, NetworkError } from "./components";
 import { useEffect, useState } from "react";
 import MyShop from "./pages/adminPages/MyShop";
 import Orders from "./pages/adminPages/Orders";
@@ -20,6 +14,9 @@ import Profile from "./pages/Profile";
 import { Navigate } from "react-router-dom";
 import { baseApiURL } from "../config/api";
 import { GET } from "../config/getFunction";
+import AdminLoading from "./pages/Loading/AdminLoading";
+import AuthMiddleware from "./pages/MiddalwarePages/AuthMiddalware";
+import AdminMiddleware from "./pages/MiddalwarePages/AdminMiddalware";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./store/Slices/authSlice";
@@ -29,7 +26,6 @@ const App = () => {
   //redux
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-  const [isAdmin, setIsAdmin] = useState(null);
   const location = useLocation();
   const [pathName, setPathName] = useState(location.pathname);
   const [loading, setLoading] = useState(false);
@@ -57,7 +53,6 @@ const App = () => {
       GET(`${baseApiURL}/auth/login?apikey=${token}`)
         .then((data) => {
           if (data.status == 200) {
-            setIsAdmin(data.user.isAdmin);
             dispatch(getUser({ isAuth: true, user: data.user }));
             dispatch(setInitialItems(data.user.cart));
           } else {
@@ -91,118 +86,107 @@ const App = () => {
         progress={loadingProgress}
         onLoaderFinished={() => setLoadingProgress(0)}
       />
-      {auth.isAuth == null ? (
-        <div className="w-full h-[60px] bg-zinc-700 animate-pulse"></div>
-      ) : auth.isAuth ? (
-        isAdmin ? (
-          pathName == "/admin" ? (
-            <AdminNavbar loading={loading} />
-          ) : (
-            <Navbar loading={loading} />
-          )
-        ) : (
-          <Navbar loading={loading} />
-        )
-      ) : (
-        <Navbar loading={loading} />
-      )}
-
-      {loading && <Loading loading={loading} />}
 
       <Routes>
         <Route
           path="/"
           exact
           element={
-            <Home setLoadingProgress={setLoadingProgress} loading={loading} />
+            <>
+              {auth.isAuth == null ? (
+                <div className="w-full h-[60px] bg-zinc-700 animate-pulse"></div>
+              ) : (
+                <Navbar />
+              )}
+              <Home setLoadingProgress={setLoadingProgress} loading={loading} />
+            </>
           }
         />
         <Route
           path="/auth/register"
           exact
-          element={<Regiser setLoadingProgress={setLoadingProgress} />}
+          element={
+            <AuthMiddleware
+              component={Regiser}
+              authRequired={false}
+              redirect="/"
+              setLoadingProgress={setLoadingProgress}
+            />
+          }
         />
         <Route
           path="/auth/login"
           exact
-          element={<Login setLoadingProgress={setLoadingProgress} />}
+          element={
+            <AuthMiddleware
+              component={Login}
+              redirect="/"
+              authRequired={false}
+              setLoadingProgress={setLoadingProgress}
+            />
+          }
         />
         <Route
           path="/user/account"
           exact
           element={
-            auth.isAuth == null ? (
-              <h2>Loading...</h2>
-            ) : auth.isAuth ? (
-              isAdmin ? (
-                <Navigate to="/admin" replace={true} />
-              ) : (
-                <Account setLoadingProgress={setLoadingProgress} />
-              )
-            ) : (
-              <Navigate to="/auth/register" replace={true} />
-            )
+            <AuthMiddleware
+              component={Account}
+              redirect="/auth/register"
+              authRequired={true}
+              setLoadingProgress={setLoadingProgress}
+            />
           }
         />
         <Route
           path="/user/account/profile"
           exact
           element={
-            auth.isAuth == null ? (
-              <h2>Loading</h2>
-            ) : auth.isAuth ? (
-              isAdmin ? (
-                <Navigate to="/admin" replace={true} />
-              ) : (
-                <Profile setLoadingProgress={setLoadingProgress} />
-              )
-            ) : (
-              <Navigate to="/auth/register" replace={true} />
-            )
+            <AuthMiddleware
+              component={Profile}
+              redirect="/auth/register"
+              authRequired={true}
+              setLoadingProgress={setLoadingProgress}
+            />
           }
         />
         <Route
           path="/admin"
           exact
           element={
-            isAdmin == null ? (
-              <h2>Loading...</h2>
-            ) : isAdmin ? (
-              <MyShop
-                setLoadingProgress={setLoadingProgress}
-                loading={loading}
-              />
-            ) : (
-              <Navigate to="/" replace={true} />
-            )
+            <AdminMiddleware
+              loadingComponent={AdminLoading}
+              component={MyShop}
+              redirect="/user/account"
+              setLoadingProgress={setLoadingProgress}
+              loading={loading}
+            />
           }
         />
         <Route
           path="/admin/orders"
           exact
           element={
-            isAdmin ? (
-              <Orders
-                setLoadingProgress={setLoadingProgress}
-                loading={loading}
-              />
-            ) : (
-              <Navigate to="/" replace={true} />
-            )
+            <AdminMiddleware
+              loadingComponent={<h2>loading...</h2>}
+              component={Orders}
+              redirect="/user/orders"
+              setLoadingProgress={setLoadingProgress}
+              loading={loading}
+            />
           }
         />
         <Route
           path="/admin/users"
           exact
           element={
-            isAdmin ? (
-              <Users
-                setLoadingProgress={setLoadingProgress}
-                loading={loading}
-              />
-            ) : (
-              <Navigate to="/" replace={true} />
-            )
+            <AdminMiddleware
+              loadingComponent={<h2>loading...</h2>}
+              component={Users}
+              redirect="/"
+              setLoadingProgress={setLoadingProgress}
+              loading={loading}
+            />
           }
         />
         <Route path="/*" element={<Error />} />
