@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { baseApiURL } from "../../../config/api";
+
 
 const initialState = {
     isAuth:null,

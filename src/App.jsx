@@ -23,6 +23,7 @@ import { GET } from "../config/getFunction";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./store/Slices/authSlice";
+import { setInitialItems } from "./store/Slices/cartSlice";
 
 const App = () => {
   //redux
@@ -57,6 +58,7 @@ const App = () => {
         .then((data) => {
           if (data.status == 200) {
             dispatch(getUser({ isAuth: true, user: data.user }));
+            dispatch(setInitialItems(data.user.cart));
             setIsAdmin(data.user.isAdmin);
           } else {
             dispatch(getUser({ isAuth: false, user: null }));

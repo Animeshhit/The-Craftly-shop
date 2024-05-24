@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
   const location = useLocation();
   const auth = useSelector((state) => state.auth);
+  const cart = useSelector((state) => state.cart);
   const [cartContainer, setCartContainer] = useState(false);
   const [accountContainer, setAccountContainer] = useState(false);
   const [menubar, setMenuBar] = useState(false);
@@ -34,6 +35,14 @@ const Navbar = () => {
             >
               <ion-icon name="close-outline"></ion-icon>
             </div>
+          </div>
+          <div className="cart__body my-3">
+            {" "}
+            {cart && cart.length > 0 ? (
+              cart.map((item, index) => `item${index}`)
+            ) : (
+              <p className="text-center text-gray-400">Nothing is on Cart</p>
+            )}
           </div>
         </div>
       </div>

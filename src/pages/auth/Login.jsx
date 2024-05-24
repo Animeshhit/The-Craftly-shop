@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 //redux
 import { useDispatch } from "react-redux";
 import { login } from "../../store/Slices/authSlice";
+import { setInitialItems } from "../../store/Slices/cartSlice";
 
 const Login = ({ setLoadingProgress }) => {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ const Login = ({ setLoadingProgress }) => {
             console.log(data);
             localStorage.setItem("__token", data.token);
             dispatch(login(data.user));
+            dispatch(setInitialItems(data.user.cart));
             setUserData(initialUserData);
             alert(data.message);
             navigate("/", { replace: true });
