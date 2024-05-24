@@ -6,10 +6,12 @@ import "swiper/css/pagination";
 
 import { Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Hero = () => {
   const [banners, setBanners] = useState(null);
   const [imageLoad, setImageLoad] = useState(true);
+  const [MainBanner, setMainBanner] = useState(null);
 
   const getAllBannersImages = async () => {
     try {
@@ -17,15 +19,22 @@ const Hero = () => {
       let APIRES = await APIREQ.json();
 
       if (APIREQ.status == 200) {
+        APIRES.map((item) => {
+          if (item.isMainImage) {
+            setMainBanner(item);
+          }
+        });
         setBanners(APIRES);
       } else {
         alert(APIRES.message);
         setBanners([]);
+        setMainBanner(false);
       }
     } catch (err) {
       // alert("NetWork Connection Error");
       console.log(err);
       setBanners([]);
+      setMainBanner(false);
     }
   };
   useEffect(() => {
@@ -49,19 +58,45 @@ const Hero = () => {
             <SwiperSlide className="hero__slider bg-zinc-900 animate-pulse"></SwiperSlide>
           </>
         ) : banners.length > 0 ? (
-          banners.map((item, key) => (
-            <SwiperSlide key={key} className="hero__slider">
-              <img
-                loading="lazy"
-                decoding="auto"
-                className={`${imageLoad ? "blur-md" : ""}`}
-                onLoad={() => {
-                  setImageLoad(false);
-                }}
-                src={item.bannerImage}
-              />
-            </SwiperSlide>
-          ))
+          <>
+            {MainBanner && MainBanner ? (
+              <SwiperSlide className="hero__slider">
+                <NavLink to={MainBanner.bannerLink}>
+                  {" "}
+                  <img
+                    loading="lazy"
+                    decoding="auto"
+                    className={`${imageLoad ? "blur-md" : ""}`}
+                    onLoad={() => {
+                      setImageLoad(false);
+                    }}
+                    src={MainBanner.bannerImage}
+                  />
+                </NavLink>
+              </SwiperSlide>
+            ) : (
+              ""
+            )}
+            {banners.map((item, key) => {
+              if (!item.isMainImage) {
+                return (
+                  <SwiperSlide key={key} className="hero__slider">
+                    <NavLink to={item.bannerLink}>
+                      <img
+                        loading="lazy"
+                        decoding="auto"
+                        className={`${imageLoad ? "blur-md" : ""}`}
+                        onLoad={() => {
+                          setImageLoad(false);
+                        }}
+                        src={item.bannerImage}
+                      />
+                    </NavLink>
+                  </SwiperSlide>
+                );
+              }
+            })}
+          </>
         ) : (
           <SwiperSlide className="flex items-center justify-center bg-zinc-900">
             <h2 className="font-Karla text-white text-xl">No Banners Found</h2>

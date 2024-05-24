@@ -94,7 +94,7 @@ const Navbar = () => {
       </div>
 
       {/* account dropdown menu end  */}
-      <header className="sm:py-3 py-4">
+      <header className="sm:py-3 py-4 h-[120px] md:h-auto">
         <div className="container mx-auto ms:px-0 px-4">
           <div className="navbar__container flex items-center justify-between">
             <NavLink
@@ -154,8 +154,8 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="navbar__right__container flex items-center sm:gap-8 gap-4">
-              <form className="navbar__search-bar relative w-[250px] md:flex hidden items-center">
-                <div className="searchbar__icon absolute flex items-center justify-center left-3">
+              <form className="navbar__search-bar absolute left-0 right-0 md:relative md:w-[250px] md:flex  items-center w-full top-16 px-3 md:top-0 md:px-0">
+                <div className="searchbar__icon absolute top-3 flex items-center justify-center left-6 md:left-3">
                   <ion-icon name="search"></ion-icon>
                 </div>
                 <input
