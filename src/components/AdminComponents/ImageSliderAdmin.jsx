@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { baseApiURLForAdmin, baseApiURL, token } from "../../../config/api";
+import { baseApiURLForAdmin, baseApiURL } from "../../../config/api";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -19,7 +19,7 @@ const ImageSliderAdmin = ({
   editBtnDisabled,
   setEditBtnDisabled,
   deleteBtnDisabled,
-  setDeleteBtnDisabled
+  setDeleteBtnDisabled,
 }) => {
   const [MainImageDropDown, setMainImageDropDown] = useState(false);
   const [slidesPerView, setSlidesPerView] = useState(3);
@@ -48,6 +48,8 @@ const ImageSliderAdmin = ({
   // function for deleting a banner
   const deleteABanner = async (bannerId) => {
     try {
+      let token = localStorage.getItem("__token");
+      if (!token) return;
       setLoadingProgress(30);
       let APIREQ = await fetch(
         `${baseApiURLForAdmin}/deleteabannerimage?bannerId=${bannerId}&adminapikey=${token}`,
@@ -97,6 +99,8 @@ const ImageSliderAdmin = ({
   //function to set main image
   const setMainImage = async (bannerId) => {
     try {
+      let token = localStorage.getItem("__token");
+      if (!token) return;
       setLoadingProgress(30);
       setMainImageDropDown(false);
       let APIREQ = await fetch(
@@ -113,17 +117,14 @@ const ImageSliderAdmin = ({
       console.log(APIRES);
       if (APIREQ.status == 200) {
         updateMainImage(bannerId);
-      }
-      else{
+      } else {
         alert(APIRES.message);
         console.log(APIRES);
       }
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
       alert(err.message);
-    }
-    finally{
+    } finally {
       setBanners(banners);
       setLoadingProgress(100);
     }
@@ -131,9 +132,9 @@ const ImageSliderAdmin = ({
 
   const editABannerImage = async ({ _id, bannerImage, bannerLink }) => {
     setIsPopupOpen(true);
-    setData({bannerImage,bannerLink});
-    setEdit({mode:true,id:_id});
-  }
+    setData({ bannerImage, bannerLink });
+    setEdit({ mode: true, id: _id });
+  };
   useEffect(() => {
     const handleResize = () => {
       // Adjust slidesPerView based on screen width
@@ -157,7 +158,7 @@ const ImageSliderAdmin = ({
 
   useEffect(() => {
     getAllBannersImages();
-  },[])
+  }, []);
   return (
     <>
       <section id="image__slider__editor" className="my-12">

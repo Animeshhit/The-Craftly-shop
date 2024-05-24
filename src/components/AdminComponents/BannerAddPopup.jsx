@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { baseApiURLForAdmin, token } from "../../../config/api";
+import { baseApiURLForAdmin } from "../../../config/api";
 
 const BannerAddPopup = ({
   isPopupOpen,
@@ -26,6 +26,8 @@ const BannerAddPopup = ({
   // for creating a new banner
   const createNewBanner = async () => {
     try {
+      let token = localStorage.getItem("__token");
+      if (!token) return;
       setLoadingProgress(30);
       let APIREQ = await fetch(
         `${baseApiURLForAdmin}/addnewbanner?adminapikey=${token}`,
@@ -39,6 +41,7 @@ const BannerAddPopup = ({
       );
       let APIRES = await APIREQ.json();
       setLoadingProgress(50);
+      console.log(APIRES);
       if (APIREQ.status == 201) {
         alert(APIRES.message);
         setIsPopupOpen(false);
@@ -78,7 +81,7 @@ const BannerAddPopup = ({
                 onClick={() => {
                   setData(initialData);
                   setIsPopupOpen(false);
-                  setEdit({mode:false,id:null});
+                  setEdit({ mode: false, id: null });
                 }}
               >
                 <svg
