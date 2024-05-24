@@ -11,6 +11,7 @@ const Navbar = () => {
   const auth = useSelector((state) => state.auth);
   const [cartContainer, setCartContainer] = useState(false);
   const [accountContainer, setAccountContainer] = useState(false);
+  const [menubar, setMenuBar] = useState(false);
 
   useEffect(() => {
     setAccountContainer(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
     <>
       <div
         className={`cart__container__overlay transition ${
-          cartContainer ? "" : "translate-x-full"
+          cartContainer ? "" : "translate-x-[120%]"
         } fixed top-0 left-0 right-0 bottom-0`}
         style={{ zIndex: 200 }}
       >
@@ -94,25 +95,50 @@ const Navbar = () => {
               <ion-icon name="storefront"></ion-icon>
               <span className="font-Karla">The Craftly Shop</span>
             </NavLink>
-            <div className="navbar__links md:flex hidden">
-              <ul className="flex items-center gap-4">
+            <div
+              className={`navbar__links transition-transform ${
+                menubar ? "" : "-translate-x-full"
+              } md:translate-x-0 flex md:relative fixed top-0 left-0 right-0 bottom-0 md:bg-transparent bg-zinc-800 h-screen md:h-auto`}
+              style={{ zIndex: 3000 }}
+            >
+              <div
+                onClick={() => {
+                  setMenuBar(false);
+                }}
+                className="menu__close__btn flex md:hidden items-center justify-center text-white text-2xl absolute right-3 top-5"
+              >
+                <ion-icon name="close-outline"></ion-icon>
+              </div>
+              <ul className="flex items-center justify-center md:justify-normal flex-col md:flex-row gap-4  w-full md:w-auto">
                 <li>
-                  <NavLink className="block py-3 px-2 text-sm" to="/">
+                  <NavLink
+                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    to="/"
+                  >
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2 text-sm" to="/">
+                  <NavLink
+                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    to="/"
+                  >
                     Shop
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2 text-sm" to="/">
+                  <NavLink
+                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    to="/"
+                  >
                     Offers
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="block py-3 px-2 text-sm" to="/">
+                  <NavLink
+                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    to="/"
+                  >
                     Contact
                   </NavLink>
                 </li>
@@ -167,7 +193,12 @@ const Navbar = () => {
                   </NavLink>
                 )}
               </div>
-              <div className="navbar__menu md:hidden flex items-center justify-center text-2xl">
+              <div
+                className="navbar__menu md:hidden flex items-center justify-center text-2xl"
+                onClick={() => {
+                  setMenuBar(true);
+                }}
+              >
                 <ion-icon name="menu-outline"></ion-icon>
               </div>
             </div>
