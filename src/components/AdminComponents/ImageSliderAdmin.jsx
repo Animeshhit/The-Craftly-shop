@@ -177,7 +177,7 @@ const ImageSliderAdmin = ({
                   onClick={() => {
                     setMainImageDropDown((state) => !state);
                   }}
-                  className="text-white bg-zinc-900 hover:bg-zinc-600 font-medium rounded-lg  px-5 py-2.5 text-center inline-flex items-center"
+                  className="text-white bg-zinc-900 hover:bg-zinc-600 rounded-md  px-5 py-2.5 text-center inline-flex items-center text-sm shadow-lg hover:shadow-none transition"
                   type="button"
                 >
                   Change Main Image{" "}
@@ -288,7 +288,7 @@ const ImageSliderAdmin = ({
                         </button>
                       </div>
                     </div>
-                    <img src={item.bannerImage} />
+                    <img className="rounded-md" src={item.bannerImage} />
                   </SwiperSlide>
                 ))
               )}
@@ -299,7 +299,7 @@ const ImageSliderAdmin = ({
                   setEdit({ mode: false, id: null });
                   setIsPopupOpen(true);
                 }}
-                className="py-3 px-12 bg-zinc-800 text-white rounded-md font-semibold font-Karla cursor-pointer hover:bg-zinc-600 transition flex items-center gap-2"
+                className="py-3 px-5 bg-zinc-800 text-white rounded-md font-Karla cursor-pointer hover:bg-zinc-600 transition flex items-center gap-2 text-sm"
               >
                 <div className="text-xl flex items-center justify-center">
                   {" "}

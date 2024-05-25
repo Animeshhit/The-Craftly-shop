@@ -16,11 +16,11 @@ const Navbar = () => {
               navbarState ? "" : "-translate-x-full md:translate-x-0"
             } transition w-full sm:w-1/2 top-0 left-0 bottom-0 md:bg-white flex items-center justify-center md:justify-end bg-zinc-900 z-10 md:relative`}
           >
-            <ul className="flex md:flex-row flex-col items-center gap-4">
+            <ul className="flex md:flex-row flex-col items-center gap-3">
               <li>
                 <NavLink
                   to="/admin/users"
-                  className="py-2 px-3  block font-semibold text-white md:text-zinc-800 hover:text-gray-400 md:hover:text-zinc-500"
+                  className="py-2 px-3  block font-semibold text-white md:text-zinc-800 hover:text-gray-400 md:hover:text-zinc-500 font-Karla"
                 >
                   Users
                 </NavLink>
@@ -29,7 +29,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/admin/orders"
-                  className="py-2 px-3  block font-semibold text-white md:text-zinc-800 hover:text-gray-400 md:hover:text-zinc-500"
+                  className="py-2 px-3  block font-semibold text-white md:text-zinc-800 hover:text-gray-400 md:hover:text-zinc-500 font-Karla"
                 >
                   Orders
                 </NavLink>
@@ -38,7 +38,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/admin"
-                  className="py-2 px-3  block font-semibold text-white md:text-zinc-800 hover:text-gray-400 md:hover:text-zinc-500"
+                  className="py-2 px-3 text-sm  block font-Karla font-semibold text-white md:text-zinc-800 hover:text-gray-400 md:hover:text-zinc-500"
                 >
                   My Shop
                 </NavLink>
@@ -47,7 +47,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/"
-                  className="py-3 px-6 bg-white block md:bg-zinc-900 text-zinc-900 md:text-white rounded-full"
+                  className="py-3 px-6 text-sm font-Karla bg-white hover:bg-zinc-800 block md:bg-zinc-900 md:hover:bg-zinc-600 transition shadow-lg hover:shadow-non text-zinc-900 md:text-white rounded-md"
                 >
                   Login as Customer
                 </NavLink>

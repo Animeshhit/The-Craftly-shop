@@ -79,10 +79,7 @@ const Profile = ({ setLoadingProgress }) => {
     <>
       <section className="my-24 relative">
         <div className="side__image hidden lg:flex absolute right-16 -top-6 w-[520px] h-[520px]">
-          <img
-            src="/AccountFull.svg"
-            className="w-full h-full object-contain"
-          />
+          <img src="/AccountNew.svg" className="w-full h-full object-contain" />
         </div>
         <div className="container ml-auto px-4">
           <h1 className="font-Karla font-bold text-2xl">

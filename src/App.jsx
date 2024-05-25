@@ -11,6 +11,7 @@ import Login from "./pages/auth/Login";
 import Error from "./pages/Error";
 import Account from "./pages/Account";
 import Profile from "./pages/Profile";
+import AdminProductPage from "./pages/adminPages/Product";
 import { Navigate } from "react-router-dom";
 import { baseApiURL } from "../config/api";
 import { GET } from "../config/getFunction";
@@ -184,6 +185,19 @@ const App = () => {
               loadingComponent={<h2>loading...</h2>}
               component={Users}
               redirect="/"
+              setLoadingProgress={setLoadingProgress}
+              loading={loading}
+            />
+          }
+        />
+        <Route
+          path="/admin/product/:id"
+          exact
+          element={
+            <AdminMiddleware
+              loadingComponent={<h2>loading...</h2>}
+              component={AdminProductPage}
+              redirect={"/"}
               setLoadingProgress={setLoadingProgress}
               loading={loading}
             />

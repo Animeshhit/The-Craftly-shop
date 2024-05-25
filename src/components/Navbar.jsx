@@ -102,6 +102,7 @@ const Navbar = () => {
               className="logo sm:text-xl font-Karla font-semibold flex items-center gap-2"
             >
               <ion-icon name="storefront"></ion-icon>
+
               <span className="font-Karla">The Craftly Shop</span>
             </NavLink>
             <div

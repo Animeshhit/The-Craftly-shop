@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 
-const ProductAdmin = ({ Price, OPrice, discount, ProductImage }) => {
+const ProductAdmin = ({ Price, OPrice, discount, ProductImage, src }) => {
   return (
     <NavLink
-      to="/product/edit"
+      to={src}
       className="product__admin__card w-[300px] h-auto shadow-lg"
     >
       <div className="card__image__container w-full h-[250px]  bg-zinc-800 flex items-center justify-center">
