@@ -94,12 +94,12 @@ const Navbar = () => {
       </div>
 
       {/* account dropdown menu end  */}
-      <header className="sm:py-3 py-4 h-[120px] md:h-auto">
+      <header className="sm:py-3 py-3 h-[120px] md:h-auto">
         <div className="container mx-auto ms:px-0 px-4">
           <div className="navbar__container flex items-center justify-between">
             <NavLink
               to="/"
-              className="logo sm:text-xl font-Karla font-semibold flex items-center gap-2"
+              className="logo font-Karla font-semibold flex items-center gap-2"
             >
               <ion-icon name="storefront"></ion-icon>
 
@@ -119,10 +119,10 @@ const Navbar = () => {
               >
                 <ion-icon name="close-outline"></ion-icon>
               </div>
-              <ul className="flex items-center justify-center md:justify-normal flex-col md:flex-row gap-4  w-full md:w-auto">
+              <ul className="flex items-center justify-center md:justify-normal flex-col md:flex-row gap-5 w-full md:w-auto">
                 <li>
                   <NavLink
-                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    className="block py-3 px-1 text-sm md:text-zinc-900 md:hover:text-zinc-400 transition text-white font-Karla font-semibold"
                     to="/"
                   >
                     Home
@@ -130,7 +130,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    className="block py-3 px-1 text-sm md:text-zinc-900 md:hover:text-zinc-400 transition text-white font-Karla font-semibold"
                     to="/"
                   >
                     Shop
@@ -138,7 +138,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    className="block py-3 px-1 text-sm md:text-zinc-900 md:hover:text-zinc-400 transition text-white font-Karla font-semibold"
                     to="/"
                   >
                     Offers
@@ -146,7 +146,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    className="block py-3 px-2 text-sm md:text-zinc-900 text-white"
+                    className="block py-3 px-1 text-sm md:text-zinc-900 md:hover:text-zinc-400 transition text-white font-Karla font-semibold"
                     to="/"
                   >
                     Contact
@@ -155,8 +155,8 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="navbar__right__container flex items-center sm:gap-8 gap-4">
-              <form className="navbar__search-bar absolute left-0 right-0 md:relative md:w-[250px] md:flex  items-center w-full top-16 px-3 md:top-0 md:px-0">
-                <div className="searchbar__icon absolute top-3 flex items-center justify-center left-6 md:left-3">
+              <form className="navbar__search-bar absolute left-0 right-0 md:relative md:w-[250px] md:flex  items-center w-full top-16 px-3 md:top-0 md:px-0 font-Karla text-sm">
+                <div className="searchbar__icon absolute top-2.5 flex items-center justify-center left-6 md:left-4">
                   <ion-icon name="search"></ion-icon>
                 </div>
                 <input
