@@ -71,7 +71,11 @@ const Product = ({ setLoadingProgress }) => {
                   <ion-icon name="add-circle-outline"></ion-icon>
                 </div>
                 {currentProduct && (
-                  <img src={currentProduct.productImage} alt="image" />
+                  <img
+                    src={currentProduct.productImage}
+                    alt="image"
+                    className="w-full h-full object-cover object-center hover:object-contain transition"
+                  />
                 )}
               </div>
               {/* main image  */}
