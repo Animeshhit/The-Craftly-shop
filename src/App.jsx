@@ -16,6 +16,7 @@ import { Navigate } from "react-router-dom";
 import { baseApiURL } from "../config/api";
 import { GET } from "../config/getFunction";
 import AdminLoading from "./pages/Loading/AdminLoading";
+import ProductLoading from "./pages/Loading/ProductLoading";
 import AuthMiddleware from "./pages/MiddalwarePages/AuthMiddalware";
 import AdminMiddleware from "./pages/MiddalwarePages/AdminMiddalware";
 //redux
@@ -195,7 +196,7 @@ const App = () => {
           exact
           element={
             <AdminMiddleware
-              loadingComponent={<h2>loading...</h2>}
+              loadingComponent={ProductLoading}
               component={AdminProductPage}
               redirect={"/"}
               setLoadingProgress={setLoadingProgress}

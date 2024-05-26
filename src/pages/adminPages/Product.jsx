@@ -1,17 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { GET } from "../../../config/getFunction";
+import { baseApiURL } from "../../../config/api";
 
-const Product = () => {
-  const [mainImage, setMainImage] = useState({
-    isMain: true,
-    item: "bg-blue-500",
-  });
+const Product = ({ setLoadingProgress }) => {
+  const { id } = useParams();
   const location = useLocation();
   const [pathname, setPathName] = useState(location.pathname);
+  const [currentProduct, setCurrentProduct] = useState(null);
   useEffect(() => {
     setPathName(location.pathname);
     console.lo;
   }, [location.pathname]);
+
+  const getProduct = async () => {
+    try {
+      if (!id) {
+        return;
+      }
+      console.log(id);
+      GET(`${baseApiURL}/product?id=${id}`)
+        .then((data) => {
+          if (data.status == 200) {
+            console.log(data);
+            setCurrentProduct(data.product[0]);
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.message);
+        });
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
   return (
     <>
       <section className="admin__product my-8">
@@ -29,9 +59,7 @@ const Product = () => {
             <div className="product__images w-1/2">
               {/* main image  */}
               <div
-                className={`product__image__main relative w-full h-[350px] flex items-center justify-center rounded-md ${
-                  mainImage && mainImage.item
-                }`}
+                className={`product__image__main relative w-full h-[350px] flex items-center justify-center rounded-md`}
               >
                 <div className="absolute right-2 cursor-pointer top-2 text-white py-3 px-4 rounded-md bg-[rgba(0,0,0,0.8)] flex items-center justify-center">
                   <ion-icon name="create-outline"></ion-icon>
@@ -42,72 +70,22 @@ const Product = () => {
                 <div className="absolute right-[17%] cursor-pointer top-2 text-white py-3 px-4 rounded-md bg-[rgba(0,0,0,0.8)] flex items-center justify-center">
                   <ion-icon name="add-circle-outline"></ion-icon>
                 </div>
-                <h1 className="font-Karla text-white text-3xl">
-                  {mainImage && mainImage.isMain ? "Main Image" : ""}
-                </h1>
+                {currentProduct && (
+                  <img src={currentProduct.productImage} alt="image" />
+                )}
               </div>
               {/* main image  */}
               <div className="product__images__others flex items-center gap-3 my-4 overflow-auto">
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: true, item: "bg-violet-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-violet-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-blue-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-blue-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-yellow-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-yellow-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-red-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-red-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-green-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-green-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-violet-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-violet-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-blue-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-blue-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-yellow-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-yellow-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-red-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-red-600 rounded-md flex-shrink-0"
-                ></div>
-                <div
-                  onClick={() => {
-                    setMainImage({ isMain: false, item: "bg-green-600" });
-                  }}
-                  className="others w-[60px] h-[60px] bg-green-600 rounded-md flex-shrink-0"
-                ></div>
+                <div className="others w-[60px] h-[60px] bg-violet-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-blue-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-yellow-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-red-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-green-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-violet-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-blue-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-yellow-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-red-600 rounded-md flex-shrink-0"></div>
+                <div className="others w-[60px] h-[60px] bg-green-600 rounded-md flex-shrink-0"></div>
               </div>
             </div>
             {/* right side  */}
@@ -115,15 +93,11 @@ const Product = () => {
               <div className="product__title">
                 <h1 className="font-Karla font-semibold leading-7 text-2xl">
                   {" "}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Expedita reprehenderit blanditiis quia?
+                  {currentProduct && currentProduct.productName}
                 </h1>
               </div>
               <div className="product__description mt-4 font-Karla text-sm">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Expedita reprehenderit blanditiis quia? Lorem ipsum, dolor sit
-                amet consectetur adipisicing elit. Expedita reprehenderit
-                blanditiis quia?
+                {currentProduct && currentProduct.productDescription}
               </div>
               <div className="product__rating my-3 flex items-center gap-2">
                 <div className="rating bg-blue-600 w-max py-1 px-2 text-xs rounded-md text-white font-Karla">
@@ -132,10 +106,12 @@ const Product = () => {
                 <p className="font-Karla text-sm">386 rating & 200 reviews</p>
               </div>
               <div className="product__price my-4 flex items-center gap-2">
-                <h1 className="font-Karla font-semibold text-3xl">1299</h1>
+                <h1 className="font-Karla font-semibold text-3xl">
+                  {currentProduct && currentProduct.price}
+                </h1>
                 <p className="text-gray-400 font-Karla line-through">3999</p>
                 <p className="font-Karla text-blue-500 font-semibold text-xl">
-                  78% off
+                  {currentProduct && currentProduct.discount}% off
                 </p>
               </div>
               <div className="product__edit__btn flex items-center gap-3">

@@ -34,7 +34,7 @@ const AdminLoading = () => {
             innerStyles="rounded-full"
           />
         </div>
-        <div className="flex items-center gap-3 flex-wrap my-12">
+        <div className="flex items-center justify-center gap-3 flex-wrap my-12">
           {Array.from({ length: 12 }).map((item) => (
             <SklLoading styles="w-[300px] h-[300px]" innerStyles="rounded-md" />
           ))}

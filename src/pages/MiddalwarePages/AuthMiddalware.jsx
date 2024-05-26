@@ -5,6 +5,7 @@ import { Navbar } from "../../components";
 
 const AuthMiddleware = ({
   component: Component,
+  loadingComponent: LoadingComponent,
   redirect,
   authRequired,
   ...rest
@@ -15,7 +16,7 @@ const AuthMiddleware = ({
     <>
       <Navbar />
       {auth.isAuth === null ? (
-        "loading"
+        <LoadingComponent />
       ) : auth.isAuth ? (
         authRequired ? (
           <Component {...rest} />

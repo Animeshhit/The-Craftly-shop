@@ -5,7 +5,7 @@ import { AdminNavbar } from "../../components";
 
 const AdminMiddleware = ({
   component: Component,
-  loadingComponent,
+  loadingComponent: LoadingComponet,
   redirect,
   ...rest
 }) => {
@@ -15,7 +15,7 @@ const AdminMiddleware = ({
     <>
       <AdminNavbar />
       {auth.isAuth == null ? (
-        <loadingComponent />
+        <LoadingComponet />
       ) : auth.isAuth ? (
         auth.user.isAdmin ? (
           <Component {...rest} />

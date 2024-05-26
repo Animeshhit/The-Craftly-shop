@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductAdmin from "./ProductAdmin";
+import { baseApiURL } from "../../../config/api";
+import { GET } from "../../../config/getFunction";
 
-const ProductsAdmin = () => {
+const ProductsAdmin = ({ products, setProducts }) => {
+  const getAllProducts = async () => {
+    try {
+      GET(`${baseApiURL}/products`)
+        .then((data) => {
+          if (data.status == 200) {
+            setProducts(data.products);
+            console.log(data.products);
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((err) => {
+          alert(err.message);
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
+    }
+  };
+  useEffect(() => {
+    getAllProducts();
+  }, []);
   return (
     <>
       <section id="products__admin" className="my-6">
@@ -10,16 +35,23 @@ const ProductsAdmin = () => {
             className="product__admin__container flex items-center gap-6 flex-wrap justify-center
           "
           >
-            {Array.from({ length: 10 }).map((item, key) => (
-              <ProductAdmin
-                key={key}
-                src={`/admin/product/${key}`}
-                Price="399"
-                OPrice="500"
-                discount="50"
-                ProductImage="https://plus.unsplash.com/premium_photo-1665218521340-cf742f7f639f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              />
-            ))}
+            {products == null ? (
+              "loading"
+            ) : products.length > 0 ? (
+              products.map((item, key) => (
+                <ProductAdmin
+                  key={key}
+                  src={`/admin/product/${item._id}`}
+                  Price={item.price}
+                  OPrice="500"
+                  discount={item.discount}
+                  ProductImage={item.productImage}
+                  Name={item.productName}
+                />
+              ))
+            ) : (
+              <p>No products Found</p>
+            )}
           </div>
         </div>
       </section>

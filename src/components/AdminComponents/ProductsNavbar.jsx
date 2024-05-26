@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductsNavbar = () => {
+const ProductsNavbar = ({ setIsProductPopupOpen, isProductPopupOpen }) => {
   return (
     <>
       <section id="products__navbar">
@@ -9,6 +9,9 @@ const ProductsNavbar = () => {
             <button
               type="button"
               className="py-3 px-6 sm:w-auto w-full bg-zinc-900 text-white rounded-md text-sm font-Karla flex items-center gap-2"
+              onClick={() => {
+                setIsProductPopupOpen(true);
+              }}
             >
               <div className="flex-center">
                 <ion-icon name="cube-outline"></ion-icon>

@@ -1,18 +1,16 @@
 import { NavLink } from "react-router-dom";
 
-const ProductAdmin = ({ Price, OPrice, discount, ProductImage, src }) => {
+const ProductAdmin = ({ Price, OPrice, discount, ProductImage, src, Name }) => {
   return (
     <NavLink
       to={src}
       className="product__admin__card w-[300px] h-auto shadow-lg"
     >
-      <div className="card__image__container w-full h-[250px]  bg-zinc-800 flex items-center justify-center">
-        <span className="text-white font-Karla text-2xl">300 X 250</span>
+      <div className="card__image__container w-full h-[250px] flex items-center justify-center">
+        <img src={ProductImage} />
       </div>
       <div className="card__body py-3 px-4">
-        <p className="capitalize font-Karla text-xl font-semibold">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-        </p>
+        <p className="capitalize font-Karla text-xl font-semibold">{Name}</p>
         <div className="product__info flex items-center my-3 gap-3">
           <p>
             <strong>Price :</strong>
