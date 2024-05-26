@@ -27,6 +27,11 @@ const ProductsAdmin = ({ products, setProducts }) => {
   useEffect(() => {
     getAllProducts();
   }, []);
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
+
   return (
     <>
       <section id="products__admin" className="my-6">

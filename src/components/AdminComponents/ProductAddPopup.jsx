@@ -44,12 +44,16 @@ const ProductAddPopup = ({
       )
         .then((data) => {
           setLoadingProgress(70);
-          console.log(data);
-          setProducts([...products, data.product]);
-          setProductInfo(initialProductInfo);
-          setIsProductPopupOpen(false);
+          if (data.status == 201) {
+            setProducts([...products, data.product]);
+            setProductInfo(initialProductInfo);
+            setIsProductPopupOpen(false);
+          } else {
+            alert(data.message);
+          }
         })
         .catch((err) => {
+          console.log(err);
           alert(err.message);
         });
     } catch (err) {
