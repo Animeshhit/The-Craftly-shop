@@ -18,6 +18,7 @@ const BannerAddPopup = ({
   const initialData = {
     bannerImage: "",
     bannerLink: "",
+    bannerText: "",
   };
 
   const handleChange = (e) => {
@@ -28,6 +29,7 @@ const BannerAddPopup = ({
     try {
       let token = localStorage.getItem("__token");
       if (!token) return;
+      if (data.bannerImage == null || data.bannerImage == "") return;
       setLoadingProgress(30);
       let APIREQ = await fetch(
         `${baseApiURLForAdmin}/addnewbanner?adminapikey=${token}`,
@@ -71,7 +73,7 @@ const BannerAddPopup = ({
         <div className="relative p-4 w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg">
             <div className="flex items-center justify-between p-4 md:p-5  rounded-t dark:border-gray-600">
-              <h3 className="text-xl font-semibold text-gray-900">
+              <h3 className="text-xl font-Karla font-semibold text-gray-900">
                 Add Banner and a Link
               </h3>
               <button
@@ -120,7 +122,7 @@ const BannerAddPopup = ({
                 <div>
                   <label
                     htmlFor="bannerImage"
-                    className="block mb-2 font-medium text-gray-900"
+                    className="block mb-2 font-Karla font-medium text-gray-900 text-sm"
                   >
                     Banner Image
                   </label>
@@ -130,15 +132,32 @@ const BannerAddPopup = ({
                     id="bannerImage"
                     value={data.bannerImage}
                     onChange={handleChange}
-                    className="py-3 px-4 w-full outline-none bg-gray-300 rounded-md"
+                    className="py-3 px-4 text-sm font-Karla w-full outline-none bg-gray-300 rounded-md"
                     placeholder="https://plus.unsplash.com/premium_photo-1715588659685-fac565ef60bb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     required
                   />
                 </div>
                 <div>
                   <label
+                    htmlFor="bannerText"
+                    className="block mb-2 font-Karla font-medium text-gray-900 text-sm"
+                  >
+                    Banner Text
+                  </label>
+                  <input
+                    type="text"
+                    name="bannerText"
+                    id="bannerText"
+                    value={data.bannerText}
+                    onChange={handleChange}
+                    className="py-3 px-4 text-sm font-Karla w-full outline-none bg-gray-300 rounded-md"
+                    placeholder="Product Banner Text"
+                  />
+                </div>
+                <div>
+                  <label
                     htmlhtmlFor="bannerLink"
-                    className="block mb-2 font-medium text-gray-900"
+                    className="block mb-2 font-medium text-sm font-Karla text-gray-900"
                   >
                     Banner Link
                   </label>
@@ -149,14 +168,13 @@ const BannerAddPopup = ({
                     value={data.bannerLink}
                     onChange={handleChange}
                     placeholder="/products"
-                    className="py-3 px-4 outline-none w-full rounded-md bg-gray-300"
-                    required
+                    className="py-3 px-4 text-sm font-Karla outline-none w-full rounded-md bg-gray-300"
                   />
                 </div>
                 <button
                   disabled={submitBtnDisabled}
                   type="submit"
-                  className="w-full text-white bg-zinc-900 py-3 px-4 rounded-md"
+                  className="w-full text-sm font-Karla text-white bg-zinc-900 py-3 px-4 rounded-md"
                 >
                   {edit.mode ? "Update Banner" : "Create Banner"}
                 </button>

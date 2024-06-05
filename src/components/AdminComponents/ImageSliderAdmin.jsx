@@ -130,9 +130,14 @@ const ImageSliderAdmin = ({
     }
   };
 
-  const editABannerImage = async ({ _id, bannerImage, bannerLink }) => {
+  const editABannerImage = async ({
+    _id,
+    bannerImage,
+    bannerLink,
+    bannerText,
+  }) => {
     setIsPopupOpen(true);
-    setData({ bannerImage, bannerLink });
+    setData({ bannerImage, bannerLink, bannerText });
     setEdit({ mode: true, id: _id });
   };
   useEffect(() => {
@@ -265,7 +270,7 @@ const ImageSliderAdmin = ({
                   >
                     <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
                       <p className="font-Karla font-semibold text-white text-xl py-3">
-                        {item.isMainImage ? "Main Image" : "sample text"}
+                        {item.isMainImage ? "Main Image" : ""}
                       </p>
                       <div className="flex items-center gap-4 justify-center">
                         <button

@@ -35,6 +35,7 @@ const MyShop = ({ setLoadingProgress }) => {
   const initialData = {
     bannerImage: "",
     bannerLink: "",
+    bannerText: "",
   };
   const [data, setData] = useState(initialData);
   const [products, setProducts] = useState(null);

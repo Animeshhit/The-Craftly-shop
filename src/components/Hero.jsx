@@ -4,7 +4,7 @@ import { baseApiURL } from "../../config/api";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -48,7 +48,11 @@ const Hero = () => {
           dynamicBullets: true,
         }}
         loop={true}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Autoplay]}
       >
         {banners == null ? (
           <>
