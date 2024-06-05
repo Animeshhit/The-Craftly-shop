@@ -4,8 +4,8 @@ const ProductsNavbar = ({ setIsProductPopupOpen, isProductPopupOpen }) => {
   return (
     <>
       <section id="products__navbar">
-        <div className="container mx-auto sm:px-4 px-0">
-          <div className="products__navbar__container px-4">
+        <div className="container mx-auto px-4 sm:px-0">
+          <div className="products__navbar__container">
             <button
               type="button"
               className="py-3 px-6 sm:w-auto w-full bg-zinc-900 text-white rounded-md text-sm font-Karla flex items-center gap-2"
