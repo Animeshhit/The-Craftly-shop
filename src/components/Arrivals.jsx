@@ -1,60 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Product from "./Product";
+import { baseApiURL } from "../../config/api";
+import { GET } from "../../config/getFunction";
 
 const Arrivals = () => {
+  const [products, setProducts] = useState(null);
+  const errorState = [["Something went wrong!!"]];
+
+  // states of data buffering
+  // null ====> Loading
+  // [] ====> No product
+  // [{...}] ==> Data found and ready to shoow
+  // [[]] =====> server error or network error
+
+  const getProducts = async () => {
+    try {
+      GET(`${baseApiURL}/products`)
+        .then((res) => {
+          console.log(res);
+          if (res.status !== 200) {
+            setProducts(errorState);
+            alert(res.message);
+            return;
+          }
+          setProducts(res.products);
+        })
+        .catch((err) => {
+          console.log(err);
+          setProducts(errorState);
+          alert(err.message);
+        });
+    } catch (err) {
+      console.log(err);
+      setProducts(errorState);
+      alert("something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <section id="newArrivals__section" className="my-12">
       <div className="container mx-auto md:px-0 px-4">
-        <h1 className="font-extrabold font-Karla my-12 text-3xl">
-          New Arrivals
+        <h1 className="font-bold font-Karla my-12 text-3xl relative">
+          New{" "}
+          <strong className="text-md cssTextUnderLIneSystem font-Karla text-blue-800">
+            Arrivals
+          </strong>
         </h1>
 
-        <div className="newArrivals__cards flex flex-wrap justify-start gap-12">
-          <Product
-            image={
-              "https://plus.unsplash.com/premium_photo-1665218521340-cf742f7f639f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            title="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-            price="399"
-            original__price="500"
-            discount="70"
-          />
-          <Product
-            image={
-              "https://plus.unsplash.com/premium_photo-1665218521340-cf742f7f639f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            title="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-            price="399"
-            original__price="500"
-            discount="70"
-          />
-          <Product
-            image={
-              "https://plus.unsplash.com/premium_photo-1665218521340-cf742f7f639f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            title="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-            price="399"
-            original__price="500"
-            discount="70"
-          />
-          <Product
-            image={
-              "https://plus.unsplash.com/premium_photo-1665218521340-cf742f7f639f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            title="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-            price="399"
-            original__price="500"
-            discount="70"
-          />
-          <Product
-            image={
-              "https://plus.unsplash.com/premium_photo-1665218521340-cf742f7f639f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            title="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-            price="399"
-            original__price="500"
-            discount="70"
-          />
+        <div className="newArrivals__cards grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          {products == null
+            ? "loading...."
+            : products.length > 0
+            ? products[0][0]
+              ? products[0][0]
+              : products.map((item, key) => {
+                  return (
+                    <Product
+                      key={key}
+                      image={item.productImage}
+                      title={item.productName}
+                      price="399"
+                      original__price="500"
+                      discount="70"
+                    />
+                  );
+                })
+            : "no proudct found"}
         </div>
       </div>
     </section>

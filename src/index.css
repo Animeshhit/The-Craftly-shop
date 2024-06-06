@@ -62,3 +62,15 @@
 .vertical-center{
   @apply top-1/2 translate-y-1/2;
 }
+
+.cssTextUnderLIneSystem{
+  @apply relative;
+}
+
+.cssTextUnderLIneSystem::after{
+  content: "";
+  position: absolute;
+  @apply w-[70px] h-[2px] bg-zinc-900 bg-blue-800;
+  right: 0;
+  bottom: 0;
+}

@@ -89,7 +89,7 @@ const Hero = () => {
                       <img
                         loading="lazy"
                         decoding="auto"
-                        className={`${imageLoad ? "blur-md" : ""}`}
+                        className={`${imageLoad ? "blur-md" : ""} object-contain`}
                         onLoad={() => {
                           setImageLoad(false);
                         }}

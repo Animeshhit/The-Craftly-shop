@@ -3,19 +3,24 @@ import { NavLink } from "react-router-dom";
 
 const Product = ({ image, title, price, discount, original__price }) => {
   return (
-    <NavLink to={"/"} className="product__card w-auto h-[250px]">
-      <div className="product__card__image__container w-full h-full">
+    <NavLink
+      to={"/"}
+      className="product__card w-full h-auto bg-gray-100 rounded-br-lg rounded-bl-lg"
+    >
+      <div className="product__card__image w-full relative">
+        <div className="absolute py-2 px-6 bg-zinc-900 text-white rounded-tl-lg rounded-br-lg font-Karla text-sm font-semibold">
+          New
+        </div>
         <img
           src={image}
-          className="product__image w-full h-full object-cover object-center"
-          alt="product__image"
+          alt={title}
+          className="h-[300px] w-full object-cover object-center rounded-tr-lg rounded-tl-lg"
         />
       </div>
-      <div className="product__card__body">
-        <p>{title}</p>
-        <div className="product__card__pricing">
-          <span>{original__price}</span>
-          <span>{price}</span>
+      <div className="product__card__body px-4 py-3">
+        <h1 className="font-Karla font-bold">{title}</h1>
+        <div className="product__card__price__tag">
+          <strong></strong>
         </div>
       </div>
     </NavLink>

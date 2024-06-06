@@ -8,7 +8,6 @@ const Home = ({ setLoadingProgress }) => {
   return (
     <>
       <Hero />
-      <Featured />
       <Arrivals />
     </>
   );
