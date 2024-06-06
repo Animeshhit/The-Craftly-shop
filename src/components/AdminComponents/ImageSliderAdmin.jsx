@@ -3,7 +3,7 @@ import { baseApiURLForAdmin, baseApiURL } from "../../../config/api";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import { useEffect, useState } from "react";
 
 const ImageSliderAdmin = ({
@@ -182,7 +182,7 @@ const ImageSliderAdmin = ({
                   onClick={() => {
                     setMainImageDropDown((state) => !state);
                   }}
-                  className="text-white bg-zinc-900 hover:bg-zinc-600 rounded-md  px-5 py-2.5 text-center inline-flex items-center text-sm shadow-lg hover:shadow-none transition"
+                  className="text-white bg-zinc-900 hover:bg-zinc-600 rounded-md  px-5 py-2.5 text-center inline-flex items-center text-sm shadow-lg hover:shadow-none transition font-Karla"
                   type="button"
                 >
                   Change Main Image{" "}
@@ -217,12 +217,16 @@ const ImageSliderAdmin = ({
                     {banners && banners.length > 0
                       ? banners.map((item, key) => (
                           <li
-                            className="py-3 px-4 hover:bg-zinc-800 cursor-pointer"
+                            key={key}
+                            className="py-3 px-4 hover:bg-zinc-800 cursor-pointer font-Karla flex items-center justify-center"
                             onClick={() => {
                               setMainImage(item._id);
                             }}
                           >
-                            {key + 1} Image
+                            <img
+                              src={item.bannerImage}
+                              className="w-[100px] object-contain h-[30px]"
+                            />
                           </li>
                         ))
                       : ""}
@@ -234,9 +238,10 @@ const ImageSliderAdmin = ({
               className="mt-4"
               pagination={{ dynamicBullets: true }}
               loop={true}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
               slidesPerView={slidesPerView}
               spaceBetween={30}
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay]}
             >
               {banners == null ? (
                 <>
@@ -264,11 +269,9 @@ const ImageSliderAdmin = ({
                 banners.map((item, key) => (
                   <SwiperSlide
                     key={key}
-                    className={`image__slider__editor ${
-                      item.isMainImage ? "main__image" : ""
-                    }`}
+                    className={`image__slider__editor bg-zinc-500`}
                   >
-                    <div className="image__slider__editor__container text-center flex items-center justify-center flex-col">
+                    <div className="image__slider__editor__container text-center flex items-center justify-center flex-col rounded-md">
                       <p className="font-Karla font-semibold text-white text-xl py-3">
                         {item.isMainImage ? "Main Image" : ""}
                       </p>
@@ -293,7 +296,13 @@ const ImageSliderAdmin = ({
                         </button>
                       </div>
                     </div>
-                    <img className="rounded-md" src={item.bannerImage} />
+                    <img
+                      className={`${
+                        item.isMainImage ? "main__image" : ""
+                      } rounded-md`}
+                      style={{ objectFit: "contain" }}
+                      src={item.bannerImage}
+                    />
                   </SwiperSlide>
                 ))
               )}
