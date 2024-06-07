@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Arrivals, Featured, Hero } from "../components";
+import { Arrivals, Featured, Hero, Catagories } from "../components";
 
 const Home = ({ setLoadingProgress }) => {
   useEffect(() => {
@@ -8,6 +8,7 @@ const Home = ({ setLoadingProgress }) => {
   return (
     <>
       <Hero />
+      <Catagories />
       <Arrivals />
     </>
   );

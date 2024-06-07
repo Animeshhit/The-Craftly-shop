@@ -16,6 +16,7 @@ import Button from "./CustomComponents/Button";
 import NetworkError from "./NetworkError";
 import SklLoading from "./CustomComponents/SklLoading";
 import ProductAddPopup from "./AdminComponents/ProductAddPopup";
+import Catagories from "./Catagories";
 
 export {
   Footer,
@@ -35,5 +36,6 @@ export {
   Button,
   NetworkError,
   SklLoading,
-  ProductAddPopup
+  ProductAddPopup,
+  Catagories
 };

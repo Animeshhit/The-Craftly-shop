@@ -19,8 +19,15 @@ const Product = ({ image, title, price, discount, original__price }) => {
       </div>
       <div className="product__card__body px-4 py-3">
         <h1 className="font-Karla font-bold">{title}</h1>
-        <div className="product__card__price__tag">
-          <strong></strong>
+        <div className="product__card__price__tag mt-3 flex items-center gap-3">
+          <strong className="flex items-center">
+            <img src="/rs.svg" className="w-4 h-4" alt="rs" />
+            {price}
+          </strong>
+          <p className="line-through text-sm font-Karla font-semibold text-gray-600">
+            1299
+          </p>
+          <p className="font-semibold text-blue-600">{discount}%</p>
         </div>
       </div>
     </NavLink>

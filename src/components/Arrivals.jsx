@@ -63,9 +63,9 @@ const Arrivals = () => {
                       key={key}
                       image={item.productImage}
                       title={item.productName}
-                      price="399"
+                      price={item.price}
                       original__price="500"
-                      discount="70"
+                      discount={item.discount}
                     />
                   );
                 })
