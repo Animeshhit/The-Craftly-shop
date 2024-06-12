@@ -17,6 +17,7 @@ import NetworkError from "./NetworkError";
 import SklLoading from "./CustomComponents/SklLoading";
 import ProductAddPopup from "./AdminComponents/ProductAddPopup";
 import Catagories from "./Catagories";
+import AdminCatagories from "./AdminComponents/Categories";
 
 export {
   Footer,
@@ -37,5 +38,6 @@ export {
   NetworkError,
   SklLoading,
   ProductAddPopup,
-  Catagories
+  Catagories,
+  AdminCatagories,
 };

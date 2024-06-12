@@ -5,6 +5,7 @@ import {
   ProductsAdmin,
   ProductsNavbar,
   ProductAddPopup,
+  AdminCatagories,
 } from "../../components";
 import { baseApiURLForAdmin } from "../../../config/api";
 
@@ -126,6 +127,9 @@ const MyShop = ({ setLoadingProgress }) => {
         deleteBtnDisabled={deleteBtnDisabled}
         setDeleteBtnDisabled={setDeleteBtnDisabled}
       />
+
+      <AdminCatagories />
+
       <ProductsNavbar
         setIsProductPopupOpen={setIsProductPopupOpen}
         isProductPopupOpen={isProductPopupOpen}
