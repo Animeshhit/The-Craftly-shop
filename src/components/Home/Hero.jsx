@@ -48,7 +48,7 @@ const Hero = () => {
   return (
     <>
       <Swiper
-        className="w-full mx-auto h-[200px] md:h-[400px]"
+        className="w-full mx-auto"
         pagination={{
           dynamicBullets: true,
         }}
@@ -74,8 +74,8 @@ const Hero = () => {
                   {" "}
                   <img
                     loading="lazy"
-                    decoding="auto"
-                    className={`w-full h-full object-cover blur bg-zinc-900 object-center rounded-lg`}
+                    decoding="async"
+                    className={`w-full h-full object-contain blur bg-zinc-900 object-center rounded-lg`}
                     src={MainBanner.bannerImage}
                     onLoad={(e) => e.target.classList.add("loaded")}
                   />
@@ -91,8 +91,8 @@ const Hero = () => {
                     <NavLink to={item.bannerLink} className="w-full h-full">
                       <img
                         loading="lazy"
-                        decoding="auto"
-                        className={`w-full h-full object-cover blur bg-zinc-900 object-center rounded-lg`}
+                        decoding="async"
+                        className={`w-full h-full object-contain blur bg-zinc-900 object-center rounded-lg`}
                         src={item.bannerImage}
                         onLoad={(e) => e.target.classList.add("loaded")}
                       />
