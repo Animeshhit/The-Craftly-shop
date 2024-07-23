@@ -101,21 +101,23 @@ const ProductView = ({ setLoadingProgress }) => {
   const orderNowUsingWht = () => {
     let { purpose, date, des } = dataForOrder;
     if (purpose == "" || !purpose) {
-      toast("Please Provide Purpose");
+      alert("Please Provide Purpose");
+      return;
     }
     if (date == "" || !date) {
-      toast("Please Provide us Date");
+      alert("Please Provide us Date");
+      return;
     }
 
     if (!product) return;
 
     const message = `Hello, I am interested in buying *${
-      product.productName
-    }* which has *_${product.productDescription}*_
+      product.name
+    }* which has *_${product.description}*_
 
 *Purpose :* ${purpose}.
 *Expect To Be Delivered :* ${date}.
-${des ? `*Description :* ${des}` : ""}`;
+${des ? `*Description :* ${des}` : "Not specified"}`;
 
     console.log(message);
 
