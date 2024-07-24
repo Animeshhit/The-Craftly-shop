@@ -381,7 +381,7 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
 
-                <h3 className="mt-12 font-Karla font-semibold text-lg">
+                {/* <h3 className="mt-12 font-Karla font-semibold text-lg">
                   Delivery
                 </h3>
 
@@ -389,7 +389,7 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
                   laboriosam dolorum, id ad non autem ratione adipisci quisquam
                   illum pariatur, accusamus dicta ducimus?
-                </p>
+                </p> */}
 
                 {/* <Tabs defaultValue="account" className="w-full mt-8">
                   <TabsList className="flex bg-blue-600 py-6 items-center justify-around">
