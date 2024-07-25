@@ -14,6 +14,7 @@ import axios from "axios";
 const Hero = () => {
   const [banners, setBanners] = useState(null);
   const [MainBanner, setMainBanner] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const getAllBannersImages = async () => {
     try {
@@ -45,10 +46,24 @@ const Hero = () => {
   useEffect(() => {
     getAllBannersImages();
   }, []);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Swiper
-        className="w-full mx-auto"
+        className="w-full h-[350px] sm:h-[600px] mx-auto"
         pagination={{
           dynamicBullets: true,
         }}
@@ -62,21 +77,28 @@ const Hero = () => {
         {banners == null ? (
           <>
             {" "}
-            <SwiperSlide className="hero__slider bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
-            <SwiperSlide className="hero__slider bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
-            <SwiperSlide className="hero__slider bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
+            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
+            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
+            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
           </>
         ) : banners.length > 0 ? (
           <>
             {MainBanner && MainBanner ? (
-              <SwiperSlide>
-                <NavLink to={MainBanner.bannerLink} className="w-full h-full">
+              <SwiperSlide className="w-full h-[350px] sm:h-[600px]">
+                <NavLink
+                  to={MainBanner.bannerLink}
+                  className="w-full h-[350px] sm:h-[600px]"
+                >
                   {" "}
                   <img
                     loading="lazy"
                     decoding="async"
-                    className={`w-full h-full object-contain blur bg-zinc-900 object-center rounded-lg`}
-                    src={MainBanner.bannerImage}
+                    className={`w-full h-[350px] sm:h-[600px] object-cover blur bg-zinc-900 object-center rounded-lg`}
+                    src={
+                      windowWidth <= 500
+                        ? MainBanner.phoneBannerImage
+                        : MainBanner.bannerImage
+                    }
                     onLoad={(e) => e.target.classList.add("loaded")}
                   />
                 </NavLink>
@@ -87,13 +109,17 @@ const Hero = () => {
             {banners.map((item, key) => {
               if (!item.isMainImage) {
                 return (
-                  <SwiperSlide key={key}>
-                    <NavLink to={item.bannerLink} className="w-full h-full">
+                  <SwiperSlide className="w-full h-[350px] sm:h-[600px]" key={key}>
+                    <NavLink to={item.bannerLink} className="w-full h-[350px] sm:h-[600px]">
                       <img
                         loading="lazy"
                         decoding="async"
-                        className={`w-full h-full object-contain blur bg-zinc-900 object-center rounded-lg`}
-                        src={item.bannerImage}
+                        className={`w-full h-[350px] sm:h-[600px] object-cover blur bg-zinc-900 object-center rounded-lg`}
+                        src={
+                          windowWidth <= 500
+                            ? item.phoneBannerImage
+                            : item.bannerImage
+                        }
                         onLoad={(e) => e.target.classList.add("loaded")}
                       />
                     </NavLink>
@@ -103,7 +129,7 @@ const Hero = () => {
             })}
           </>
         ) : (
-          <SwiperSlide className="flex items-center justify-center bg-zinc-900">
+          <SwiperSlide className="flex h-[350px] sm:h-[600px] items-center justify-center bg-zinc-900">
             <h2 className="font-Karla text-white text-xl">No Banners Found</h2>
           </SwiperSlide>
         )}

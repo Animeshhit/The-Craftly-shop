@@ -6,6 +6,7 @@ import { Skeleton } from "@/shadcnui/ui/skeleton";
 
 //others
 import axios from "axios";
+import truncateText from "@/Helper/TextSpliter";
 
 const Categories = () => {
   const [ctgs, setCtgs] = useState(null);
@@ -71,7 +72,7 @@ const Categories = () => {
                 <div className="w-[80px] h-[80px] bg-zinc-800 flex-center">
                   <span className="font-Karla text-white text-sm">80X80</span>
                 </div>
-                <p className="text-nowrap">{item.name}</p>
+                <p className="text-nowrap">{truncateText(item.name, 10)}</p>
               </NavLink>
             ))
           : "No Categories Are Available Right Now"}

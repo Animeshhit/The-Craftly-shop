@@ -36,6 +36,7 @@ import Spacer from "@/shadcnui/ui/Spacer";
 import { toast } from "sonner";
 
 import ImageSlider from "../components/ProductView/ImageSlider";
+import truncateText from "@/Helper/TextSpliter";
 
 const ProductView = ({ setLoadingProgress }) => {
   const { id, text } = useParams();
@@ -43,6 +44,7 @@ const ProductView = ({ setLoadingProgress }) => {
   // slider work ========================================>
   const swiperRef = useRef(null);
   const [currentSlide, setcurrentSlide] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // page slide to top =======================================
   const scrollToTop = () => {
@@ -127,6 +129,19 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
     window.open(url, "_blank");
   };
 
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       {product == null ? (
@@ -176,7 +191,11 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                      <BreadcrumbPage>{product.name}</BreadcrumbPage>
+                      <BreadcrumbPage>
+                        {windowWidth <= 375
+                          ? truncateText(product.name, 18)
+                          : product.name}
+                      </BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>
                 </Breadcrumb>
