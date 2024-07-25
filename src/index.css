@@ -7,36 +7,34 @@
 * {
   font-family: "Poppins", sans-serif;
 }
-.font-Karla{
-  font-family: "Karla",sans-serif;
+.font-Karla {
+  font-family: "Karla", sans-serif;
 }
 .flex-center {
   @apply flex items-center justify-center;
 }
-.custom-scrollbar::-webkit-scrollbar{
-  width:5px;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track{
+.custom-scrollbar::-webkit-scrollbar-track {
   background-color: #f1f1f1;
   border-radius: 25px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb{
+.custom-scrollbar::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 25px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover{
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   height: 4px;
   width: 4px;
-
 }
-
 
 /* Add these styles to your CSS file */
 .blur {
@@ -48,34 +46,32 @@
   filter: blur(0);
 }
 
-
 /* navbar code  */
-.search__input input{
-  width:400px;
+.search__input input {
+  width: 400px;
 }
 
-
-
-@media (max-width:1050px){
-  .search__input input{
-    width:309px;
+@media (max-width: 1050px) {
+  .search__input input {
+    width: 309px;
   }
 }
 
-.bg-grad-banner{
-  background: rgb(24,22,23);
-background: linear-gradient(90deg, rgba(24,22,23,1) 0%, rgba(9,9,121,1) 24%, rgba(42,204,237,1) 100%);
+.bg-grad-banner {
+  background: rgb(24, 22, 23);
+  background: linear-gradient(
+    90deg,
+    rgba(24, 22, 23, 1) 0%,
+    rgba(9, 9, 121, 1) 24%,
+    rgba(42, 204, 237, 1) 100%
+  );
 }
-
-
 
 /* navbar code ends  */
 
-
-
 /* catogories */
 
-.ctg_box{
+.ctg_box {
   @apply flex flex-col items-center;
 }
 
@@ -85,9 +81,8 @@ background: linear-gradient(90deg, rgba(24,22,23,1) 0%, rgba(9,9,121,1) 24%, rgb
   border-radius: 50%;
 } */
 
-.ctg_box p{
+.ctg_box p {
   @apply text-sm font-Karla font-semibold mt-3;
-
 }
 /* 
 
@@ -113,140 +108,126 @@ background: linear-gradient(90deg, rgba(24,22,23,1) 0%, rgba(9,9,121,1) 24%, rgb
 
 /* catogories end  */
 
-
-
-@media (max-width:500px) {
-  .main_Product__container{
-    grid-template-columns:6 !important;
+@media (max-width: 500px) {
+  .main_Product__container {
+    grid-template-columns: 6 !important;
   }
 }
 
 /* image slider  */
 
-
-.image__slider__main{
-  width:550px;
+.image__slider__main {
+  width: 550px;
   height: 550px;
 }
 
-
-.image__slider__images{
+.image__slider__images {
   height: 550px;
 }
 
-
-.image__slider__images .image{
+.image__slider__images .image {
   width: 80px;
   height: 80px;
 }
 
-
-@media (max-width:1400px) {
-  .image__slider__main{
-    width:500px;
+@media (max-width: 1400px) {
+  .image__slider__main {
+    width: 500px;
     height: 500px;
   }
-  .image__slider__images{
+  .image__slider__images {
     height: 500px;
   }
 }
 
-
-@media (max-width:1280px) {
-  .image__slider__main{
-    width:450px;
+@media (max-width: 1280px) {
+  .image__slider__main {
+    width: 450px;
     height: 450px;
   }
-  .image__slider__images{
+  .image__slider__images {
     height: 450px;
   }
 }
 
-@media (max-width:1180px){
-  .image__slider__wrapper{
+@media (max-width: 1180px) {
+  .image__slider__wrapper {
     flex-direction: column-reverse;
   }
-  .image__slider__main{
-    width:500px;
+  .image__slider__main {
+    width: 500px;
     height: 500px;
   }
-  .image__slider__images{
+  .image__slider__images {
     flex-direction: row;
     width: 500px;
     height: 100px !important;
     overflow: auto;
   }
-  .image__slider__images .image{
+  .image__slider__images .image {
     flex-shrink: 0;
   }
-  .image__slider__images .image img{
+  .image__slider__images .image img {
     flex-shrink: 0;
   }
-  
 }
 
-
-@media (max-width:1000px) {
-  .main__product_view{
+@media (max-width: 1000px) {
+  .main__product_view {
     flex-direction: column;
     align-items: center;
   }
-  .product__description__container{
-    width:100%
+  .product__description__container {
+    width: 100%;
   }
-  .product__image__container{
-    width:100%;
+  .product__image__container {
+    width: 100%;
   }
 
-   .image__slider__main{
-    width:700px;
+  .image__slider__main {
+    width: 700px;
     height: 700px;
   }
 
-  .image__slider__images{
-    width:700px;
+  .image__slider__images {
+    width: 700px;
   }
-  
 }
 
-@media (max-width:700px){
-  .product__description{
-    margin-block:5rem;
+@media (max-width: 700px) {
+  .product__description {
+    margin-block: 5rem;
   }
-  .image__slider__main{
-    width:100%;
+  .image__slider__main {
+    width: 100%;
     height: 100%;
   }
 
-  .image__slider__images{
-    width:100%;
+  .image__slider__images {
+    width: 100%;
   }
-  .shopping_btn{
-    gap:1rem;
+  .shopping_btn {
+    gap: 1rem;
   }
-  .cart_btn{
+  .cart_btn {
     font-size: 1rem;
   }
-  .wht_btn{
+  .wht_btn {
     font-size: 1rem;
   }
 }
 
-
-.bg-musk::after{
+.bg-musk::after {
   content: "";
   position: absolute;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  top:0;
-  background: rgba(255,255,255,0.5);
-  
+  top: 0;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* image slider end  */
-
-
 
 /* .hero__slider img {
   width: 100%;
@@ -343,14 +324,7 @@ background: linear-gradient(90deg, rgba(24,22,23,1) 0%, rgba(9,9,121,1) 24%, rgb
   }
 } */
 
-
-
-
-
-
-
 /* demo css ======================================>  */
-
 
 .title {
   font-size: 24px;
@@ -363,7 +337,6 @@ background: linear-gradient(90deg, rgba(24,22,23,1) 0%, rgba(9,9,121,1) 24%, rgb
   margin-bottom: 10px;
   font-size: 1.2rem;
   font-weight: bold;
-
 }
 .section_tab ul {
   list-style-type: none;
@@ -373,16 +346,11 @@ background: linear-gradient(90deg, rgba(24,22,23,1) 0%, rgba(9,9,121,1) 24%, rgb
   margin-bottom: 5px;
 }
 
-
-
-
 /* description styles =======================================  */
-
-
 
 /* styles.css */
 .description_container {
-  font-family: 'Karla', sans-serif;
+  font-family: "Karla", sans-serif;
   line-height: 1.6;
 }
 
