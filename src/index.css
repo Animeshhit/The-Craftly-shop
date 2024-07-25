@@ -44,6 +44,7 @@
 
 .loaded {
   filter: blur(0);
+  opacity: 1 !important;
 }
 
 /* navbar code  */

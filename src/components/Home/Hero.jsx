@@ -84,7 +84,7 @@ const Hero = () => {
         ) : banners.length > 0 ? (
           <>
             {MainBanner && MainBanner ? (
-              <SwiperSlide className="w-full h-[350px] sm:h-[600px]">
+              <SwiperSlide className="w-full h-[350px] sm:h-[600px] bg-zinc-900">
                 <NavLink
                   to={MainBanner.bannerLink}
                   className="w-full h-[350px] sm:h-[600px]"
@@ -93,7 +93,7 @@ const Hero = () => {
                   <img
                     loading="lazy"
                     decoding="async"
-                    className={`w-full h-[350px] sm:h-[600px] object-cover blur bg-zinc-900 object-center rounded-lg`}
+                    className={`w-full h-[350px] sm:h-[600px] object-cover blur opacity-0 object-center rounded-lg`}
                     src={
                       windowWidth <= 500
                         ? MainBanner.phoneBannerImage
@@ -109,12 +109,18 @@ const Hero = () => {
             {banners.map((item, key) => {
               if (!item.isMainImage) {
                 return (
-                  <SwiperSlide className="w-full h-[350px] sm:h-[600px]" key={key}>
-                    <NavLink to={item.bannerLink} className="w-full h-[350px] sm:h-[600px]">
+                  <SwiperSlide
+                    className="w-full h-[350px] sm:h-[600px] bg-zinc-900"
+                    key={key}
+                  >
+                    <NavLink
+                      to={item.bannerLink}
+                      className="w-full h-[350px] sm:h-[600px]"
+                    >
                       <img
                         loading="lazy"
                         decoding="async"
-                        className={`w-full h-[350px] sm:h-[600px] object-cover blur bg-zinc-900 object-center rounded-lg`}
+                        className={`w-full h-[350px] sm:h-[600px] object-cover blur opacity-0 object-center rounded-lg`}
                         src={
                           windowWidth <= 500
                             ? item.phoneBannerImage
