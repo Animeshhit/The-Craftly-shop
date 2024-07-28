@@ -118,7 +118,7 @@ const ProductView = ({ setLoadingProgress }) => {
       product.name
     }* product url : ${`${
       import.meta.env.VITE_REACT_APP_FRONTEND_URL
-    }/product/${text}/${id}`}
+    }/product/${encodeURIComponent(text)}/${id}`}
 
 *Purpose :* ${purpose}.
 *Expect To Be Delivered :* ${date}.
