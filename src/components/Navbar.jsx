@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <header
       style={{ zIndex: "1000" }}
-      className="shadow-md py-4 md:py-3 fixed top-0 inset-x-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all"
+      className="shadow-md py-4 md:py-3 fixed top-0 inset-x-0 w-full border-b border-gray-200 bg-white/65 backdrop-blur-lg transition-all"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
@@ -70,7 +70,7 @@ const Navbar = () => {
               <ion-icon name="cart-outline"></ion-icon>
             </NavLink>
             {auth.isAuth == null ? (
-              <div className="border-red-500 w-[40px] h-[40px] bg-zinc-800 rounded-full animate-pulse">
+              <div className="border-red-500 w-[30px] h-[30px] bg-zinc-800 rounded-full animate-pulse">
                 {" "}
               </div>
             ) : auth.isAuth ? (
