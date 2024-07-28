@@ -136,11 +136,11 @@
 
 @media (max-width: 1400px) {
   .image__slider__main {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
   }
   .image__slider__images {
-    height: 500px;
+    height: 400px;
   }
 }
 
@@ -228,6 +228,7 @@
   right: 0;
   bottom: 0;
   top: 0;
+  @apply rounded-lg;
   background: rgba(255, 255, 255, 0.5);
 }
 
@@ -353,31 +354,45 @@
 /* description styles =======================================  */
 
 /* styles.css */
+/* .description_container {
+  line-height: 1.6;
+} */
+
 .description_container {
   font-family: "Karla", sans-serif;
-  line-height: 1.6;
+}
+
+.description_container h1,
+.description_container h2 {
+  @apply my-3 text-rose-500;
 }
 
 .description_container h1 {
-  font-size: 24px;
-  margin-bottom: 12px;
+  font-weight: 550;
+  @apply text-xl sm:text-2xl;
 }
-
 .description_container h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-weight: 500;
+  @apply text-base sm:text-xl;
 }
 
 .description_container p {
-  margin-bottom: 10px;
+  font-weight: 300;
+  @apply text-sm mb-2 leading-7;
+}
+
+.description_container li {
+  font-family: "Poppins", sans-serif !important;
+  display: block;
+  padding: 0.4rem 0;
+  font-weight: 450;
+  line-height: 2;
 }
 
 .description_container strong {
-  font-weight: bold;
+  font-weight: inherit;
 }
 
-.description_container em {
-  font-style: italic;
-}
+
 
 /* Add more styles as needed */

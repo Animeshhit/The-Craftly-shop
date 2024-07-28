@@ -34,12 +34,12 @@ export default function ImageSlider({ swiperRef, setcurrentSlide, Images }) {
           }}
         >
           {Images.map((item, key) => (
-            <SwiperSlide className="bg-zinc-800" data-id={key}>
+            <SwiperSlide className="bg-zinc-800 rounded-lg" data-id={key}>
               <div className="swiper-zoom-container">
                 <img
                   src={item}
                   loading="lazy"
-                  className="bg-zinc-800 blur"
+                  className="bg-zinc-800 opacity-0 blur rounded-lg"
                   onLoad={(e) => {
                     e.target.classList.add("loaded");
                   }}

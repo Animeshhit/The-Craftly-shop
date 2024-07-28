@@ -6,14 +6,7 @@ import { NavLink } from "react-router-dom";
 //other modules
 const Product = ({ Text, product }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  function calculateDiscountPercentage(originalPrice, discountedPrice) {
-    if (originalPrice <= 0) {
-      throw new Error("Original price must be greater than zero.");
-    }
-    const discount = originalPrice - discountedPrice;
-    const discountPercentage = (discount / originalPrice) * 100;
-    return Math.floor(discountPercentage);
-  }
+ 
   return (
     <NavLink
       to={`/product/${Text}/${product._id}`}

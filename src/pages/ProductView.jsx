@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 
 //other modules
 import axios from "axios";
+import calculateDiscountPercentage from "@/Helper/DiscountCalc";
 
 import {
   Breadcrumb,
@@ -206,13 +207,13 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                         currentSlide == 0
                           ? "border-2 border-zinc-900 relative bg-musk"
                           : ""
-                      } cursor-pointer bg-zinc-800`}
+                      } cursor-pointer bg-zinc-800 rounded-lg`}
                       onClick={() => {
                         swiperRef.current.swiper.slideTo(0);
                       }}
                     >
                       <img
-                        className="w-full h-full object-cover object-center blur"
+                        className="w-full h-full rounded-lg object-cover opacity-0 object-center blur"
                         src={product.productImage}
                         onLoad={(e) => {
                           e.target.classList.add("loaded");
@@ -230,13 +231,13 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                               key + 1 == currentSlide
                                 ? "border-2 border-zinc-900 relative bg-musk"
                                 : ""
-                            } bg-zinc-800`}
+                            } bg-zinc-800 rounded-lg`}
                             onClick={() => {
                               swiperRef.current.swiper.slideTo(key + 1);
                             }}
                           >
                             <img
-                              className="w-full h-full object-cover object-center blur"
+                              className="w-full h-full opacity-0 object-cover object-center blur rounded-lg"
                               src={item}
                               onLoad={(e) => {
                                 e.target.classList.add("loaded");
@@ -259,27 +260,27 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
               <div className="product__description__container  py-12 w-1/2">
                 <div className="flex items-center justify-between mb-3">
                   <div className="">
-                    <h1 className="font-Karla font-bold text-3xl">
+                    <h1 className="font-semibold text-xl sm:text-3xl">
                       {product.name}
                     </h1>
-                    <p className="font-Karla font-semibold text-gray-500 text-sm pl-1 flex items-center">
+                    <p className="text-gray-500 text-xs sm:text-sm pl-1 flex items-center">
                       {product.sold} ratings{" "}
                       <span className="mx-2 block w-2 h-2 bg-gray-500 rounded-full"></span>{" "}
                       {product.reviews.length} reviews
                     </p>
                   </div>
-                  <div className="flex-center text-6xl text-gray-400">
+                  {/* <div className="flex-center text-6xl text-gray-400">
                     <ion-icon name="heart-circle-outline"></ion-icon>
-                  </div>
+                  </div> */}
                 </div>
                 <Separator />
-                <p className="flex gap-1 items-center text-blue-600 font-Karla text-2xl font-bold my-3">
+                <p className="flex gap-1 items-center text-rose-500 text-2xl font-bold my-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="20px"
                     viewBox="0 -960 960 960"
                     width="20px"
-                    fill="blue"
+                    fill="#f43f5e"
                   >
                     <path d="M549-120 280-400v-80h140q53 0 91.5-34.5T558-600H240v-80h306q-17-35-50.5-57.5T420-760H240v-80h480v80H590q14 17 25 37t17 43h88v80h-81q-8 85-70 142.5T420-400h-29l269 280H549Z" />
                   </svg>
@@ -289,16 +290,17 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                     {product.price}
                   </span>
                   <Spacer space="4" />
-                  <Badge
-                    variant="destructive"
-                    className="bg-blue-500 font-Karla"
-                  >
-                    Special Price
+                  <Badge className="bg-zinc-800 text-sm">
+                    {calculateDiscountPercentage(
+                      product.price,
+                      product.discount
+                    )}
+                    %
                   </Badge>
                 </p>
 
                 <div className="flex shopping_btn items-center mt-10 gap-4">
-                  <Button className="bg-red-500 cart_btn w-[240px] py-7 text-lg">
+                  <Button disabled={true} className="bg-rose-500  !text-sm">
                     <div className="flex-center text-xl mr-3">
                       <ion-icon name="cart-outline"></ion-icon>
                     </div>
@@ -307,7 +309,7 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                   {/* whatsapp button with dialog  */}
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="bg-green-700 wht_btn w-[240px] py-7 text-lg">
+                      <Button className="bg-green-500 hover:bg-green-400 !text-sm">
                         <div className="flex-center text-xl mr-3">
                           <ion-icon name="logo-whatsapp"></ion-icon>
                         </div>
@@ -391,12 +393,8 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                   </Button> */}
                 </div>
 
-                <h3 className="mt-12 font-Karla font-semibold text-lg">
-                  Product Info
-                </h3>
-
                 <div
-                  className="mt-3 description_container"
+                  className="mt-12 description_container"
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
 
