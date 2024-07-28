@@ -16,8 +16,6 @@ const Featured = ({ setLoadingProgress }) => {
           }/products/by?query=featured`
         )
         .then((res) => {
-          console.log(res.data.products);
-          alert("featured called");
           setLoadingProgress(100);
           setProducts(res.data.products);
         })

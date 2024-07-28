@@ -16,8 +16,6 @@ const BestSelling = ({ setLoadingProgress }) => {
           }/products/by?query=bestseller`
         )
         .then((res) => {
-          console.log(res.data.products);
-          alert("best selling called");
           setLoadingProgress(100);
           setProducts(res.data.products);
         })
