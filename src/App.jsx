@@ -89,6 +89,7 @@ const App = () => {
       />
 
       <Navbar />
+      <div className="bg-graphic"></div>
       <Routes>
         <Route
           path="/"
