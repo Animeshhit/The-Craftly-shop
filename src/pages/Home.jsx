@@ -3,6 +3,7 @@ import Banner from "../components/Home/Banner";
 import Categories from "../components/Home/Categories";
 import Hero from "../components/Home/Hero";
 import HomeProducts from "@/components/HomeProducts";
+import Footer from "@/components/Footer";
 
 const Home = ({ setLoadingProgress }) => {
   return (
@@ -14,6 +15,7 @@ const Home = ({ setLoadingProgress }) => {
         {/* <Banner /> */}
         <HomeProducts setLoadingProgress={setLoadingProgress} />
       </div>
+      <Footer />
     </>
   );
 };

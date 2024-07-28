@@ -19,7 +19,7 @@ const Featured = ({ setLoadingProgress }) => {
         .get(
           `${
             import.meta.env.VITE_REACT_APP_SERVER_URL
-          }/products/by?query=featured&page=${pageNumber}&limit=6`
+          }/products/by?query=featured&page=${pageNumber}&limit=8`
         )
         .then((res) => {
           let { data } = res;
