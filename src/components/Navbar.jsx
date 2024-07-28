@@ -36,7 +36,9 @@ const Navbar = () => {
               src="/logo.svg"
               alt="logo"
             />
-            <span className="text-sm  font-semibold">THE CRAFTLY SHOP</span>
+            <span className=" text-xs sm:text-sm font-semibold">
+              THE CRAFTLY SHOP
+            </span>
           </NavLink>
 
           <form className="relative search__input  border-zinc-500 rounded-full hidden border-2 md:flex items-center flex-row-reverse justify-end">

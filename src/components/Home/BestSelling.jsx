@@ -19,7 +19,7 @@ const BestSelling = ({ setLoadingProgress }) => {
         .get(
           `${
             import.meta.env.VITE_REACT_APP_SERVER_URL
-          }/products/by?query=bestseller&page=${pageNumber}&limit=8`
+          }/products/by?query=bestseller&page=${pageNumber}&limit=4`
         )
         .then((res) => {
           let { data } = res;
