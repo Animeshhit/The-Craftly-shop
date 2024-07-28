@@ -116,7 +116,9 @@ const ProductView = ({ setLoadingProgress }) => {
 
     const message = `Hello, I am interested in buying *${
       product.name
-    }* which has *_${product.description}*_
+    }* product url : ${
+      import.meta.env.VITE_REACT_APP_FRONTEND_URL
+    }/product/${text}/${id}
 
 *Purpose :* ${purpose}.
 *Expect To Be Delivered :* ${date}.
