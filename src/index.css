@@ -397,8 +397,8 @@
 
 .bg-graphic {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 100px;
+  height: 100px;
   @apply bg-rose-500;
   z-index: -2;
   left: 20%;
