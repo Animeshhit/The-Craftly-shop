@@ -25,7 +25,7 @@ const Navbar = () => {
   return (
     <header
       style={{ zIndex: "1000" }}
-      className="shadow-md py-4 md:py-3 fixed top-0 left-0 right-0 bg-white"
+      className="shadow-md py-4 md:py-3 fixed top-0 inset-x-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
@@ -36,17 +36,15 @@ const Navbar = () => {
               src="/logo.svg"
               alt="logo"
             />
-            <span className="font-Karla text-sm md:text-lg font-semibold">
-              The Craftly Shop
-            </span>
+            <span className="text-sm  font-semibold">THE CRAFTLY SHOP</span>
           </NavLink>
 
-          <form className="relative search__input  border-zinc-400 rounded-full hidden border-2 md:flex items-center flex-row-reverse justify-end">
-            <div className="flex-center h-full pr-3 text-xl">
+          <form className="relative search__input  border-zinc-500 rounded-full hidden border-2 md:flex items-center flex-row-reverse justify-end">
+            <div className="flex-center h-full pr-3 text-xl text-zinc-500">
               <ion-icon name="search-outline"></ion-icon>
             </div>
             <input
-              className="h-full font-Karla py-2 px-5 rounded-full outline-none"
+              className="h-full bg-inherit placeholder:text-zinc-500 text-sm font-Karla py-2 px-5 rounded-full outline-none"
               value={searchValue}
               onChange={(e) => {
                 setSearchValue(e.target.value);

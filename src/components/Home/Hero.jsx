@@ -77,14 +77,16 @@ const Hero = () => {
         {banners == null ? (
           <>
             {" "}
-            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
-            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
-            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-900 animate-pulse rounded-lg"></SwiperSlide>
+            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-300 animate-pulse rounded-lg"></SwiperSlide>
+            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-300 animate-pulse rounded-lg"></SwiperSlide>
+            <SwiperSlide className="hero__slider w-full h-[350px] sm:h-[600px] bg-zinc-300 animate-pulse rounded-lg"></SwiperSlide>
           </>
         ) : banners.length > 0 ? (
           <>
             {MainBanner && MainBanner ? (
-              <SwiperSlide className="w-full h-[350px] sm:h-[600px] bg-zinc-900">
+              <SwiperSlide
+                className={`w-full h-[350px] rounded-lg sm:h-[600px] bg-zinc-300`}
+              >
                 <NavLink
                   to={MainBanner.bannerLink}
                   className="w-full h-[350px] sm:h-[600px]"
@@ -99,7 +101,9 @@ const Hero = () => {
                         ? MainBanner.phoneBannerImage
                         : MainBanner.bannerImage
                     }
-                    onLoad={(e) => e.target.classList.add("loaded")}
+                    onLoad={(e) => {
+                      e.target.classList.add("loaded");
+                    }}
                   />
                 </NavLink>
               </SwiperSlide>
@@ -110,7 +114,7 @@ const Hero = () => {
               if (!item.isMainImage) {
                 return (
                   <SwiperSlide
-                    className="w-full h-[350px] sm:h-[600px] bg-zinc-900"
+                    className={`w-full h-[350px] rounded-lg sm:h-[600px]  bg-zinc-300`}
                     key={key}
                   >
                     <NavLink
@@ -126,7 +130,9 @@ const Hero = () => {
                             ? item.phoneBannerImage
                             : item.bannerImage
                         }
-                        onLoad={(e) => e.target.classList.add("loaded")}
+                        onLoad={(e) => {
+                          e.target.classList.add("loaded");
+                        }}
                       />
                     </NavLink>
                   </SwiperSlide>
@@ -135,7 +141,7 @@ const Hero = () => {
             })}
           </>
         ) : (
-          <SwiperSlide className="flex h-[350px] sm:h-[600px] items-center justify-center bg-zinc-900">
+          <SwiperSlide className="flex h-[350px] rounded-lg sm:h-[600px] items-center justify-center bg-zinc-900">
             <h2 className="font-Karla text-white text-xl">No Banners Found</h2>
           </SwiperSlide>
         )}

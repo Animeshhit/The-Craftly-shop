@@ -2,30 +2,49 @@ import Product from "../Product";
 import LoadingCard from "../LoadingCard";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { Button } from "@/shadcnui/ui/button";
+import { Loader2 } from "lucide-react";
 
 const BestSelling = ({ setLoadingProgress }) => {
   const componentRef = useRef(null);
   const [products, setProducts] = useState(null);
-  const getProducts = async () => {
+  const [page, setPage] = useState(1);
+  const [isNextPossible, setIsNextPossible] = useState(false);
+  const [isLoading, setIsLoadig] = useState(false);
+  const getProducts = async (pageNumber) => {
     try {
       setLoadingProgress(30);
+      setIsLoadig(true);
       axios
         .get(
           `${
             import.meta.env.VITE_REACT_APP_SERVER_URL
-          }/products/by?query=bestseller`
+          }/products/by?query=bestseller&page=${pageNumber}&limit=8`
         )
         .then((res) => {
+          let { data } = res;
+          if (data.next) {
+            setIsNextPossible(true);
+          } else {
+            setIsNextPossible(false);
+          }
+          if (Array.isArray(products)) {
+            setProducts([...products, ...data.products]);
+          } else {
+            setProducts(data.products);
+          }
+          setIsLoadig(false);
           setLoadingProgress(100);
-          setProducts(res.data.products);
         })
         .catch((err) => {
+          setIsLoadig(false);
           setLoadingProgress(100);
           setProducts([]);
           console.log(err);
           alert("something went wrong");
         });
     } catch (err) {
+      setIsLoadig(false);
       setLoadingProgress(100);
       setProducts([]);
       console.log(err);
@@ -37,7 +56,7 @@ const BestSelling = ({ setLoadingProgress }) => {
       (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
-          getProducts();
+          getProducts(page);
           observer.disconnect(); // Disconnect after the API call is made
         }
       },
@@ -56,14 +75,12 @@ const BestSelling = ({ setLoadingProgress }) => {
   }, []);
   return (
     <section className="mt-12" ref={componentRef}>
-      <h3 className="text-2xl sm:text-3xl font-semibold font-Karla">
-        Best <span className="text-blue-500">Selling</span>
+      <h3 className="text-2xl sm:text-3xl font-semibold">
+        Best <span className="text-zinc-700 animate-pulse">Selling</span>
       </h3>
-      <p className="font-Karla text-sm sm:text-base text-gray-500">
-        People Gave Love ❤️
-      </p>
+      <p className=" text-sm mt-1 text-gray-500">People Gave Love ❤️</p>
 
-      <div className="my-6  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div className="my-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-self-center place-content-center place-items-center">
         {products == null ? (
           <>
             <LoadingCard />
@@ -81,6 +98,24 @@ const BestSelling = ({ setLoadingProgress }) => {
           "No Best Seller Product Found"
         )}
       </div>
+      {isNextPossible && (
+        <div className="flex items-center justify-center">
+          <Button
+            onClick={() => {
+              isNextPossible && setPage((p) => p + 1);
+              getProducts(page + 1);
+            }}
+            variant="outline"
+            className="text-sm"
+          >
+            {isLoading ? (
+              <Loader2 className="animate-spin w-3 h-3" />
+            ) : (
+              "Show More"
+            )}
+          </Button>
+        </div>
+      )}
     </section>
   );
 };

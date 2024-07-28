@@ -1,3 +1,4 @@
+import AltHero from "@/components/Home/AltHero";
 import Banner from "../components/Home/Banner";
 import Categories from "../components/Home/Categories";
 import Hero from "../components/Home/Hero";
@@ -7,9 +8,10 @@ const Home = ({ setLoadingProgress }) => {
   return (
     <>
       <div className="container mx-auto px-4 my-24">
-        <Hero />
-        <Categories />
-        <Banner />
+        {/* <Hero /> */}
+        <AltHero />
+        {/* <Categories /> */}
+        {/* <Banner /> */}
         <HomeProducts setLoadingProgress={setLoadingProgress} />
       </div>
     </>

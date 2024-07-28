@@ -1,8 +1,11 @@
 //core modules
+import truncateText from "@/Helper/TextSpliter";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 //other modules
 const Product = ({ Text, product }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   function calculateDiscountPercentage(originalPrice, discountedPrice) {
     if (originalPrice <= 0) {
       throw new Error("Original price must be greater than zero.");
@@ -14,25 +17,40 @@ const Product = ({ Text, product }) => {
   return (
     <NavLink
       to={`/product/${Text}/${product._id}`}
-      className="border-2 rounded-lg inline-block w-full"
+      className="rounded-lg inline-block w-full"
     >
-      <div className="product__image__container relative h-[300px] bg-zinc-800">
-        <div className="flex-center absolute right-0 top-0 rounded-tr-lg z-20 w-50 h-50 p-3 bg-[rgba(0,0,0,0.8)] text-xl text-white">
+      <div
+        className={`relative h-[300px] max-w-[300px] bg-zinc-300 rounded-lg ${
+          !isLoaded && "animate-pulse"
+        }`}
+      >
+        {/* <div className="flex-center absolute right-0 top-0 rounded-tr-lg z-20 w-50 h-50 p-3 bg-[rgba(0,0,0,0.8)] text-xl text-white">
           <ion-icon name="heart-outline"></ion-icon>
-        </div>
+        </div> */}
         <img
           src={product.productImage}
-          className="w-full h-full rounded-t-lg bg-zinc-800 blur"
+          className="w-full object-cover object-center h-full rounded-lg transition-all bg-zinc-300 blur opacity-0"
           loading="lazy"
           onLoad={(e) => {
             e.target.classList.remove("blur");
+            e.target.classList.remove("opacity-0");
+            setIsLoaded(true);
           }}
           alt={product.name}
         />
       </div>
-      <div className="product__info mt-1 px-4 pt-1 pb-3">
-        <p className="font-Karla font-semibold text-xl">{product.name}</p>
-        <div className="product__price flex items-center mt-3">
+      <div className="product__info mt-1 pt-2 pb-3">
+        <h3 className="uppercase text-xs font-semibold text-gray-400">
+          {product.catagories}
+        </h3>
+        <h4 className="font-semibold text-balance !leading-2">
+          {truncateText(product.name, 33)}
+        </h4>
+        <p className="font-bold text-sm flex items-center mt-0.5 text-rose-500">
+          <img src="/Price.svg" alt="rs" className="w-3 h-3" />
+          {product.discount}
+        </p>
+        {/* <div className="product__price flex items-center mt-3">
           <strong className="flex items-center">
             <img className="w-5 h-5" src="/Price.svg" alt="rs" />
             <span className="sm:text-xl text-zinc-800">{product.discount}</span>
@@ -49,7 +67,7 @@ const Product = ({ Text, product }) => {
               OFF
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
     </NavLink>
   );
