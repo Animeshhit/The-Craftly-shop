@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Error = () => {
+  useEffect(() => {
+    document.title = "Error | The Craftly Shop";
+  }, []);
   return (
     <section className="container mx-auto h-screen px-4">
       <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">

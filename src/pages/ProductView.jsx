@@ -71,6 +71,7 @@ const ProductView = ({ setLoadingProgress }) => {
         .then((res) => {
           let { data } = res;
           setProduct(data.product);
+          document.title = data.product.name;
         })
         .catch((err) => {
           setProduct(false);

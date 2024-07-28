@@ -37,6 +37,10 @@ const Register = ({ setLoadingProgress }) => {
     console.log(dataError);
   }, [dataError]);
 
+  useEffect(() => {
+    document.title = "Register | The Craftly Shop";
+  }, []);
+
   // register user ================================>
 
   const registerUser = async (e) => {

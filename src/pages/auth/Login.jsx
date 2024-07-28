@@ -133,6 +133,11 @@ const Login = ({ setLoadingProgress }) => {
       setServerError(false);
     }, 900);
   }, [serverError]);
+
+  useEffect(() => {
+    document.title = "Login | The Craftly Shop";
+  }, []);
+
   return (
     <section className="login__screen my-36">
       <div className="container mx-auto  px-4">
