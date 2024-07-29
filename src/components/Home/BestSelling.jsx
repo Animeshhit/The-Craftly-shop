@@ -74,7 +74,7 @@ const BestSelling = ({ setLoadingProgress }) => {
     };
   }, []);
   return (
-    <section className="mt-12" ref={componentRef}>
+    <section className="mt-12" id="bestseller" ref={componentRef}>
       <h3 className="text-2xl sm:text-3xl font-semibold">
         Best <span className="text-zinc-700 animate-pulse">Selling</span>
       </h3>

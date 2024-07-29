@@ -26,6 +26,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shadcnui/ui/dialog";
+
 import { Input } from "@/shadcnui/ui/input";
 import { Label } from "@/shadcnui/ui/label";
 
@@ -38,6 +39,12 @@ import { toast } from "sonner";
 
 import ImageSlider from "../components/ProductView/ImageSlider";
 import truncateText from "@/Helper/TextSpliter";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/shadcnui/ui/tooltip";
+import { TooltipContent } from "@radix-ui/react-tooltip";
 
 const ProductView = ({ setLoadingProgress }) => {
   const { id, text } = useParams();
@@ -303,16 +310,23 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                 </p>
 
                 <div className="flex shopping_btn items-center mt-10 gap-4">
-                  <Button disabled={true} className="bg-rose-500  !text-sm">
-                    <div className="flex-center text-xl mr-3">
-                      <ion-icon name="cart-outline"></ion-icon>
-                    </div>
-                    <span>Add to Cart</span>
-                  </Button>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button className="bg-rose-500  !text-sm">
+                          <div className="flex-center text-xl mr-3">
+                            <ion-icon name="cart-outline"></ion-icon>
+                          </div>
+                          <span>Add to Cart</span>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>Coming soon</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                   {/* whatsapp button with dialog  */}
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button className="bg-green-500 hover:bg-green-400 !text-sm">
+                      <Button className="bg-green-600 hover:bg-green-400 !text-sm">
                         <div className="flex-center text-xl mr-3">
                           <ion-icon name="logo-whatsapp"></ion-icon>
                         </div>

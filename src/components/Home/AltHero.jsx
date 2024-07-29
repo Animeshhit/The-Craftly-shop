@@ -1,4 +1,5 @@
-import { Button } from "@/shadcnui/ui/button";
+import { Button, buttonVariants } from "@/shadcnui/ui/button";
+import { NavLink } from "react-router-dom";
 
 const AltHero = () => {
   return (
@@ -18,12 +19,18 @@ const AltHero = () => {
               occasion at The Craftly Shop.
             </p>
             <div className="flex w-full mt-10 items-center sm:justify-start justify-center">
-              <Button className="rounded-full text-sm flex items-center gap-2 px-6">
+              <a
+                href="#featured"
+                className={buttonVariants({
+                  className:
+                    "!rounded-full text-sm flex items-center gap-2 px-6",
+                })}
+              >
                 Explore now
                 <div className="flex-center">
                   <ion-icon name="arrow-forward-outline"></ion-icon>
                 </div>
-              </Button>
+              </a>
             </div>
           </div>
           <div className="right__container flex items-center justify-center w-full sm:w-1/2">

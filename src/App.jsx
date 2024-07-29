@@ -17,21 +17,12 @@ import Account from "./pages/Account";
 
 import axios from "axios";
 
-// import MyShop from "./pages/adminPages/MyShop";
-// import Orders from "./pages/adminPages/Orders";
-// import Users from "./pages/adminPages/Users";
-
-// import AdminProductPage from "./pages/adminPages/Product";
-
-// import AdminLoading from "./pages/Loading/AdminLoading";
-// import ProductLoading from "./pages/Loading/ProductLoading";
-
-// import AdminMiddleware from "./pages/MiddalwarePages/AdminMiddalware";
-
 //redux
 import { useDispatch } from "react-redux";
 import { getUser } from "./store/Slices/authSlice";
 import { setInitialItems } from "./store/Slices/cartSlice";
+
+
 
 const App = () => {
   // for Loading Bar

@@ -77,7 +77,7 @@ const Featured = ({ setLoadingProgress }) => {
   }, []);
 
   return (
-    <section className="mt-12" ref={componentRef}>
+    <section className="mt-12" id="featured" ref={componentRef}>
       <h3 className="text-2xl sm:text-3xl font-semibold">
         <span className="text-zinc-700 animate-pulse">Recently</span> Added
       </h3>
