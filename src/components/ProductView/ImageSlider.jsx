@@ -39,7 +39,7 @@ export default function ImageSlider({ swiperRef, setcurrentSlide, Images }) {
                 <img
                   src={item}
                   loading="lazy"
-                  className="bg-zinc-800 opacity-0 blur rounded-lg"
+                  className="bg-zinc-800 transition-all opacity-0 blur rounded-lg"
                   onLoad={(e) => {
                     e.target.classList.add("loaded");
                   }}

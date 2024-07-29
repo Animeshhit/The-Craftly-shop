@@ -1,9 +1,7 @@
+import FeedBack from "@/components/FeedBack";
 import AltHero from "@/components/Home/AltHero";
-import Banner from "../components/Home/Banner";
-import Categories from "../components/Home/Categories";
-import Hero from "../components/Home/Hero";
 import HomeProducts from "@/components/HomeProducts";
-import Footer from "@/components/Footer";
+
 import { useEffect } from "react";
 
 const Home = ({ setLoadingProgress }) => {
@@ -18,8 +16,8 @@ const Home = ({ setLoadingProgress }) => {
         {/* <Categories /> */}
         {/* <Banner /> */}
         <HomeProducts setLoadingProgress={setLoadingProgress} />
+        <FeedBack />
       </div>
-      <Footer />
     </>
   );
 };

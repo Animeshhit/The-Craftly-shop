@@ -223,7 +223,7 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                       }}
                     >
                       <img
-                        className="w-full h-full rounded-lg object-cover opacity-0 object-center blur"
+                        className="w-full h-full transition-all rounded-lg object-cover opacity-0 object-center blur"
                         src={product.productImage}
                         onLoad={(e) => {
                           e.target.classList.add("loaded");
@@ -247,7 +247,7 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
                             }}
                           >
                             <img
-                              className="w-full h-full opacity-0 object-cover object-center blur rounded-lg"
+                              className="w-full transition-all h-full opacity-0 object-cover object-center blur rounded-lg"
                               src={item}
                               onLoad={(e) => {
                                 e.target.classList.add("loaded");

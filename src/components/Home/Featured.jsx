@@ -3,7 +3,7 @@ import LoadingCard from "../LoadingCard";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Button } from "@/shadcnui/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, MoveDown } from "lucide-react";
 
 const Featured = ({ setLoadingProgress }) => {
   const componentRef = useRef(null);
@@ -102,19 +102,19 @@ const Featured = ({ setLoadingProgress }) => {
         )}
       </div>
       {isNextPossible && (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center  justify-center">
           <Button
             onClick={() => {
               isNextPossible && setPage((p) => p + 1);
               getProducts(page + 1);
             }}
             variant="outline"
-            className="text-sm"
+            className="text-xs rounded-lg border-rose-300 bg-white/15 backdrop-blur-xl"
           >
             {isLoading ? (
               <Loader2 className="animate-spin w-3 h-3" />
             ) : (
-              "Show More"
+              <MoveDown className="w-3 h-3" />
             )}
           </Button>
         </div>

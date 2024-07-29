@@ -121,7 +121,11 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Button variant="outline" className="text-xs" onClick={login}>
+                <Button
+                  variant="outline"
+                  className="text-xs hidden sm:flex"
+                  onClick={login}
+                >
                   Log in
                 </Button>
                 <Button
