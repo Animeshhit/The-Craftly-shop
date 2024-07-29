@@ -122,8 +122,8 @@ const Navbar = () => {
             ) : (
               <>
                 <Button
-                  variant="outline"
-                  className="text-xs hidden sm:flex"
+                  variant="ghost"
+                  className="text-xs hidden sm:flex bg-transparent backdrop-blur-lg"
                   onClick={login}
                 >
                   Log in
