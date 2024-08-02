@@ -82,12 +82,12 @@ const ProductView = ({ setLoadingProgress }) => {
         })
         .catch((err) => {
           setProduct(false);
-          alert(err.message);
+          // alert(err.message);
           console.log(err);
         });
     } catch (err) {
       console.log(err);
-      alert(err.message);
+      // alert(err.message);
       setProduct(false);
     } finally {
       setLoadingProgress(100);

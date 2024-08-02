@@ -54,7 +54,7 @@ const Search = () => {
               </>
             ) : searchRes.products.length > 0 ? (
               searchRes.products.map((item) => {
-                return <Product Text="Newly Added" product={item} />;
+                return <Product Text="From Search Results" product={item} />;
               })
             ) : (
               "No Search Results Found"
