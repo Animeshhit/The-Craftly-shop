@@ -70,6 +70,7 @@ const Navbar = () => {
             <input
               className="h-full bg-inherit placeholder:text-zinc-500 text-sm font-Karla py-2 px-5 rounded-full outline-none"
               value={searchValue}
+              autoComplete={false}
               onChange={(e) => {
                 setSearchValue(e.target.value);
                 if (e.target.value.length > 0) {
