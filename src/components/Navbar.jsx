@@ -1,8 +1,10 @@
 //core modules
 import { NavLink } from "react-router-dom";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import debounce from "lodash.debounce";
 import getSearchProducts from "@/Helper/search";
+import SearchProductCard from "./SearchProductCard";
+import { useLocation } from "react-router-dom";
 
 // import {
 //   Tooltip,
@@ -20,6 +22,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 import { Skeleton } from "@/shadcnui/ui/skeleton";
 
 const Navbar = () => {
+  const location = useLocation();
   const [searchValue, setSearchValue] = useState("");
   const [searchRes, setSearchRes] = useState(null);
   const { login, register, user, logout, isLoading, isAuthenticated } =
@@ -28,10 +31,15 @@ const Navbar = () => {
   // Debounced search function
   const debouncedSearch = useCallback(
     debounce(async (searchTerm) => {
-      getSearchProducts(searchTerm, 1, 5, setSearchRes);
+      getSearchProducts(searchTerm, 1, 7, setSearchRes);
     }, 500),
     [] // The empty array makes sure the debounce function is created only once
   );
+
+  useEffect(() => {
+    setSearchValue("");
+    setSearchRes(null);
+  }, [location.pathname]);
 
   return (
     <header
@@ -72,6 +80,17 @@ const Navbar = () => {
               type="text"
               placeholder="Search for products..."
             />
+            {searchValue.length > 0 && (
+              <div className="absolute search_sug_box bg-white/95 backdrop-blur-lg left-0 right-0 p-4 top-12 shadow-lg rounded-md">
+                {searchRes == null
+                  ? "Loading.. "
+                  : searchRes.products.length > 0
+                  ? searchRes.products.map((item, index) => {
+                      return <SearchProductCard product={item} />;
+                    })
+                  : "No products Found"}
+              </div>
+            )}
           </form>
 
           <div className="flex items-center gap-3 ">

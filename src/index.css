@@ -406,3 +406,6 @@
   border-radius: 50%;
   filter: blur(150px);
 }
+.loading {
+  @apply animate-pulse opacity-0 bg-zinc-500;
+}

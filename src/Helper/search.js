@@ -1,6 +1,7 @@
 import axios from "axios";
 const getSearchProducts = async (text, page, limit, setValue) => {
   try {
+    setValue(null);
     axios
       .get(
         `${
@@ -14,10 +15,12 @@ const getSearchProducts = async (text, page, limit, setValue) => {
       })
       .catch((err) => {
         console.log(err);
+        setValue({ products: [] });
         alert("Something went wrong");
       });
   } catch (err) {
     console.log(err);
+    setValue({ products: [] });
     alert("Network connection error");
   }
 };
