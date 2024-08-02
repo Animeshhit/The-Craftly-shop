@@ -18,7 +18,7 @@ const SearchForMobile = () => {
   return (
     <>
       <div
-        className="fixed inset-x-0 py-3 px-4 bg-white inset-y-0"
+        className="fixed inset-x-0 overflow-auto py-3 px-4 bg-white inset-y-0"
         style={{ zIndex: 30000 }}
       >
         <div>
