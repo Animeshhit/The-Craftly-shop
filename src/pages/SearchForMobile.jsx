@@ -42,7 +42,7 @@ const SearchForMobile = () => {
                 ? "Loading.. "
                 : searchResForMobile.products.length > 0
                 ? searchResForMobile.products.map((item, index) => {
-                    return <SearchProductCard product={item} />;
+                    return <SearchProductCard replace={true} product={item} />;
                   })
                 : "No products Found"}
             </div>

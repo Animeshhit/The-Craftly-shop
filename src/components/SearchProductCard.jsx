@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
 
-const SearchProductCard = ({ product }) => {
+const SearchProductCard = ({ product, replace = false }) => {
   return (
     <>
       <NavLink
+        replace={replace}
         to={`/product/From Search Results/${product._id}`}
         className="search__product__card__container flex gap-3 items-center hover:bg-zinc-200 rounded-md py-2 px-1"
       >
