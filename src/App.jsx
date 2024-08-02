@@ -10,6 +10,7 @@ import ProductView from "./pages/ProductView";
 import Error from "./pages/Error";
 import { Toaster } from "@/shadcnui/ui/sonner";
 import Footer from "./components/Footer";
+import Search from "./pages/Search";
 // import Profile from "./pages/Profile";
 // import Account from "./pages/Account";
 
@@ -36,6 +37,10 @@ const App = () => {
         <Route
           path="/product/:text/:id"
           element={<ProductView setLoadingProgress={setLoadingProgress} />}
+        />
+        <Route
+          path="/search"
+          element={<Search setLoadingProgress={setLoadingProgress} />}
         />
         <Route path="/*" element={<Error />} />
       </Routes>

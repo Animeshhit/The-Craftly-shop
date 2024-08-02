@@ -1,6 +1,8 @@
 //core modules
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
+import debounce from "lodash.debounce";
+import getSearchProducts from "@/Helper/search";
 
 // import {
 //   Tooltip,
@@ -9,7 +11,7 @@ import { useEffect, useState } from "react";
 //   TooltipTrigger,
 // } from "@/shadcnui/ui/tooltip";
 
-import { MoveRight, LogOut } from "lucide-react";
+import { MoveRight, LogOut, Trophy } from "lucide-react";
 
 import { Button } from "@/shadcnui/ui/button";
 
@@ -19,11 +21,18 @@ import { Skeleton } from "@/shadcnui/ui/skeleton";
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [searchRes, setSearchRes] = useState(null);
   const { login, register, user, logout, isLoading, isAuthenticated } =
     useKindeAuth();
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+
+  // Debounced search function
+  const debouncedSearch = useCallback(
+    debounce(async (searchTerm) => {
+      getSearchProducts(searchTerm, 1, 5, setSearchRes);
+    }, 500),
+    [] // The empty array makes sure the debounce function is created only once
+  );
+
   return (
     <header
       style={{ zIndex: "1000" }}
@@ -43,7 +52,10 @@ const Navbar = () => {
             </span>
           </NavLink>
 
-          <form className="relative search__input  border-zinc-500 rounded-full hidden border-2 md:flex items-center flex-row-reverse justify-end">
+          <form
+            action={`/search`}
+            className="relative search__input  border-zinc-500 rounded-full hidden border-2 md:flex items-center flex-row-reverse justify-end"
+          >
             <div className="flex-center h-full pr-3 text-xl text-zinc-500">
               <ion-icon name="search-outline"></ion-icon>
             </div>
@@ -52,7 +64,11 @@ const Navbar = () => {
               value={searchValue}
               onChange={(e) => {
                 setSearchValue(e.target.value);
+                if (e.target.value.length > 0) {
+                  debouncedSearch(e.target.value);
+                }
               }}
+              name="q"
               type="text"
               placeholder="Search for products..."
             />
@@ -60,12 +76,12 @@ const Navbar = () => {
 
           <div className="flex items-center gap-3 ">
             {/* search Icon for the phone user  */}
-            {/* <NavLink
+            <NavLink
               to="/"
-              className="md:hidden flex items-center justify-center text-2xl px-1 text-zinc-800"
+              className="md:hidden flex items-center justify-center text-xl px-1 text-zinc-800"
             >
               <ion-icon name="search-outline"></ion-icon>
-            </NavLink> */}
+            </NavLink>
 
             {/* Cart and watchlist  */}
             {/* <TooltipProvider>
