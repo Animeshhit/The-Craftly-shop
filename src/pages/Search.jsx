@@ -25,7 +25,7 @@ const Search = () => {
   useEffect(() => {
     if (text) {
       setIsLoadig(true);
-      getSearchProducts(text, page, 4, setSearchRes);
+      getSearchProducts(text, page, 8, setSearchRes);
 
       setIsLoadig(false);
     }
