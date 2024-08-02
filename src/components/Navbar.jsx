@@ -97,7 +97,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3 ">
             {/* search Icon for the phone user  */}
             <NavLink
-              to="/"
+              to="/search/products"
               className="md:hidden flex items-center justify-center text-xl px-1 text-zinc-800"
             >
               <ion-icon name="search-outline"></ion-icon>

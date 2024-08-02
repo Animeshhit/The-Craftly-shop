@@ -10,7 +10,6 @@ const getSearchProducts = async (text, page, limit, setValue) => {
       )
       .then((res) => {
         let { data } = res;
-        console.log(data);
         setValue(data);
       })
       .catch((err) => {

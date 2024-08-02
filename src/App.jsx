@@ -1,5 +1,5 @@
 // core modules
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // other modules
@@ -11,6 +11,8 @@ import Error from "./pages/Error";
 import { Toaster } from "@/shadcnui/ui/sonner";
 import Footer from "./components/Footer";
 import Search from "./pages/Search";
+
+import SearchForMobile from "./pages/SearchForMobile";
 // import Profile from "./pages/Profile";
 // import Account from "./pages/Account";
 
@@ -27,6 +29,7 @@ const App = () => {
       />
       <Toaster />
       <Navbar />
+
       <div className="bg-graphic"></div>
       <Routes>
         <Route
@@ -42,6 +45,12 @@ const App = () => {
           path="/search"
           element={<Search setLoadingProgress={setLoadingProgress} />}
         />
+
+        <Route
+          path="/search/products"
+          element={<SearchForMobile setLoadingProgress={setLoadingProgress} />}
+        />
+
         <Route path="/*" element={<Error />} />
       </Routes>
       <Footer />
