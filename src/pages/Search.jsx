@@ -14,6 +14,7 @@ const Search = () => {
   const [isNextPossible, setIsNextPossible] = useState(false);
 
   useEffect(() => {
+    document.title = `search results for "${text}"`;
     if (text) {
       setIsLoadig(true);
       getSearchProducts(text, page, 8, setSearchRes);
