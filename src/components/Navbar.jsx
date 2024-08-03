@@ -104,33 +104,13 @@ const Navbar = () => {
             </NavLink>
 
             {/* Cart and watchlist  */}
-            {/* <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <NavLink
-                    to="/"
-                    className="flex-center text-xl px-1 text-zinc-800"
-                  >
-                    <ion-icon name="heart-outline"></ion-icon>
-                  </NavLink>
-                </TooltipTrigger>
-                <TooltipContent>Coming soon</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            {/* <NavLink to="/" className="flex-center text-xl px-1 text-zinc-800">
+              <ion-icon name="heart-outline"></ion-icon>
+            </NavLink> */}
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <NavLink
-                    to="/"
-                    className="flex-center text-xl px-1 text-zinc-800"
-                  >
-                    <ion-icon name="cart-outline"></ion-icon>
-                  </NavLink>
-                </TooltipTrigger>
-                <TooltipContent>Comin soon</TooltipContent>
-              </Tooltip>
-            </TooltipProvider> */}
+            <NavLink to="/" className="flex-center text-xl px-1 text-zinc-800">
+              <ion-icon name="cart-outline"></ion-icon>
+            </NavLink>
 
             {isLoading ? (
               <>
@@ -146,14 +126,14 @@ const Navbar = () => {
                     alt={user.given_name}
                   />
                 </div>
-                <Button
+                {/* <Button
                   variant="outline"
                   className="text-xs flex items-center gap-2"
                   onClick={logout}
                 >
                   Sign out
                   <LogOut className="w-4 h-4" />
-                </Button>
+                </Button> */}
               </>
             ) : (
               <>

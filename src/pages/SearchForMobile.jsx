@@ -36,7 +36,7 @@ const SearchForMobile = () => {
           />
         </div>
         <div className="">
-          {mobileSearchInput.length > 0 && (
+          {mobileSearchInput.length > 0 ? (
             <div className=" search_sug_box mt-8">
               {searchResForMobile == null
                 ? "Loading.. "
@@ -46,6 +46,8 @@ const SearchForMobile = () => {
                   })
                 : "No products Found"}
             </div>
+          ) : (
+            <p className="text-xs mt-8 px-4">Your Search Results Will Appear here...</p>
           )}
         </div>
       </div>
