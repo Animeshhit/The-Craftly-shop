@@ -115,7 +115,6 @@ const Navbar = () => {
             {isLoading ? (
               <>
                 <Skeleton className="w-[100px] h-10 bg-zinc-400" />
-                <Skeleton className="w-[100px] h-10 bg-zinc-400" />
               </>
             ) : isAuthenticated ? (
               <>
