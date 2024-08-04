@@ -99,7 +99,7 @@ const Footer = () => {
   return (
     <footer id="footer" className="py-12 px-4 bg-gray-300">
       <div className="container mx-auto px-0 sm:px-4">
-        <div className="grid sm:place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid lg:place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {footerLinks.map((footer, index) => {
             return (
               <>
