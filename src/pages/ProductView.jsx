@@ -153,6 +153,10 @@ ${des ? `*Description :* ${des}` : "Not specified"}`;
     };
   }, []);
 
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
+
   return (
     <>
       {product == null ? (
